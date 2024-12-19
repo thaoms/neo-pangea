@@ -1,10 +1,10 @@
-# PangeaQuest
+# NeoPangea
 
 > A philosophical and introspective app that helps users explore deep questions about life, identity, society, and existence. Connect with thought-provoking ideas tied to locations around the world.
 
 ## Table of Contents
 
-- [PangeaQuest](#pangeaquest)
+- [NeoPangea](#neopangea)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
