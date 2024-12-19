@@ -22,7 +22,7 @@ export function getCurrentLocation(earthGroup, markerRadius) {
                     // Position the pin
                     pin.position.copy(browserMarkerPosition);
 
-                    // Scale the pin (adjust as needed)
+                    // Scale the pin
                     pin.scale.set(0.02, 0.02, 0.02);
 
                     // Compute the normal vector at this position (pointing away from Earth's center)

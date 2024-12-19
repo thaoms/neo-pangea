@@ -1,18 +1,14 @@
-// Import dependencies
 import express from 'express';
 import bodyParser from 'body-parser';
 import { OpenAI } from 'openai';
 import cors from 'cors';
 
-// Initialize Express app
 const app = express();
 const port = 3000;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// OpenAI configuration
 const openai = new OpenAI();
 
 const systemPrompt = `
@@ -81,7 +77,6 @@ app.post('/ask', async (req, res) => {
     }
 });
 
-// Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

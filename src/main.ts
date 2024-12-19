@@ -15,7 +15,7 @@ import './css/styles.css';
 
 const loadingManager = new THREE.LoadingManager();
 const loader = new THREE.TextureLoader(loadingManager);
-const markerRadius = 1.00; // Slightly above the sphere's surface
+const markerRadius = 1.00;
 
 loadingManager.onProgress = (url, loaded, total) => {
     const progress = (loaded / total) * 100;
@@ -56,14 +56,14 @@ getAudio(camera);
 
 const existentialQuestions = getSpeechBubbledAndInput(scene, camera, markerRadius);
 
-let sunAngle = 0; // Initial angle for Sun movement
+let sunAngle = 0;
 const sunOrbitRadius = 10; // Distance of Sunlight source from Earth's center
 
 function animate() {
     requestAnimationFrame(animate);
 
     // Earth rotation
-    const spinSpeed = 0.00058; // Adjusted for 3-minute rotation
+    const spinSpeed = 0.00058;
     earthGroup.rotation.y += spinSpeed;
     clouds.rotation.y += spinSpeed * 0.15; // Slightly faster for atmospheric layers
     stars.rotation.y -= 0.0001;
@@ -97,7 +97,7 @@ function animate() {
 
             bubble.style.left = `${x}px`;
             bubble.style.top = `${y}px`;
-            bubble.style.opacity = '1'; // Make visible
+            bubble.style.opacity = '1';
         }
         else {
             bubble.style.opacity = '0'; // Hide behind the Earth

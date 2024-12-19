@@ -4,7 +4,7 @@ import { latLonToVector3 } from '../utils/latLonToVector3';
 export function getSpeechBubbledAndInput(scene, camera, markerRadius) {
     const existentialQuestions = [
         { text: 'Waarom bestaan we?', lat: 51.0, lon: 3.7 }, // Voorbeeld voor Gent
-        { text: 'Waarom hebben we grenzen?', lat: 40.7, lon: -74.0 }, // Voorbeeld voor New York
+        { text: 'Hebben landsgrenzen nog een nut?', lat: 40.7, lon: -74.0 }, // Voorbeeld voor New York
         { text: 'Hoe definiëren we identiteit?', lat: 35.7, lon: 139.7 }, // Voorbeeld voor Tokio
         { text: 'Wat maakt ons menselijk?', lat: -33.9, lon: 151.2 }, // Voorbeeld voor Sydney
         { text: 'Waarom bestaat oorlog?', lat: -23.5, lon: -46.6 }, // Voorbeeld voor São Paulo
