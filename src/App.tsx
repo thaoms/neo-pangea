@@ -49,7 +49,6 @@ export function App() {
                 <div>{error.message}</div>
             )
         : (
-
                 <StrictMode>
                     <ErrorBoundary>
                         <Canvas
@@ -58,10 +57,14 @@ export function App() {
                             }}
                             camera={{ fov: 75, position: [0, 0, 3], near: 0.1, far: 1000 }}
                             gl={{
+                                pixelRatio: Math.min(window.devicePixelRatio, 2),
                                 powerPreference: 'high-performance',
-                                antialias: true,
                                 toneMapping: THREE.ACESFilmicToneMapping,
                                 outputColorSpace: THREE.SRGBColorSpace,
+                                antialias: false,
+                                alpha: false,
+                                stencil: false,
+                                depth: false,
                             }}
                         >
                             <Suspense fallback={<Html center>Loading.</Html>}>
@@ -75,9 +78,10 @@ export function App() {
                                     height={480}
                                 />
                                 <Bloom
-                                    luminanceThreshold={0}
-                                    luminanceSmoothing={1}
+                                    luminanceThreshold={0.3}
+                                    luminanceSmoothing={0.6}
                                     opacity={3}
+                                    intensity={0.5}
                                     height={300}
                                 />
                                 <Vignette eskil={false} offset={0.1} darkness={1.1} />
