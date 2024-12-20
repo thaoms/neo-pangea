@@ -9,6 +9,8 @@
   - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [Development](#development)
+    - [Production](#production)
   - [Configuration](#configuration)
   - [Contributing](#contributing)
   - [License](#license)
@@ -37,6 +39,7 @@
    `pnpm i`
 
 ## Usage
+### Development
 
 1. Lint the project:
    
@@ -47,6 +50,13 @@
 3. Start the client:
    
    `pnpm start-client`
+
+### Production
+1. `pnpm build`
+   
+2. `pnpm start-production`
+   
+3. `pnpm preview-client`
 
 ## Configuration
 

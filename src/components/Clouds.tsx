@@ -8,7 +8,7 @@ interface CloudsProps {
 
 export function Clouds({ markerRadius }: CloudsProps) {
     const cloudsRef = useRef<THREE.Mesh>(null);
-    const cloudTexture = useLoader(THREE.TextureLoader, './textures/8081_earthcloudmaptrans.jpg');
+    const cloudTexture = useLoader(THREE.TextureLoader, '/textures/8081_earthcloudmaptrans.jpg');
 
     useFrame(() => {
         if (cloudsRef.current) {

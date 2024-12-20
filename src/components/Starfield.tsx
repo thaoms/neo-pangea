@@ -8,7 +8,7 @@ interface StarfieldProps {
 
 export function Starfield({ numStars = 500 }: StarfieldProps) {
     const starFieldRef = useRef<THREE.Points>(null);
-    const starTexture = useLoader(THREE.TextureLoader, './textures/stars/circle.png');
+    const starTexture = useLoader(THREE.TextureLoader, '/textures/stars/circle.png');
 
     useFrame(() => {
         if (starFieldRef.current) {

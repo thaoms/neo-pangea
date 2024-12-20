@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 interface AudioControlProps {
-    audioFile: string; // Path to the audio file
+    audioFile: string;
 }
 
 export function AudioControl({ audioFile }: AudioControlProps) {

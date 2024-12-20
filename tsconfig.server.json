@@ -1,0 +1,15 @@
+{
+    "extends": "./tsconfig.json",       // Inherit settings from the main tsconfig.json
+    "compilerOptions": {
+        "outDir": "./dist",            // Output directory for compiled server code
+        "module": "ESNext",            // Use ES modules
+        "target": "ES2020",            // Target modern JavaScript
+        "moduleResolution": "Node",   // Resolve modules like Node.js
+        "allowJs": false,             // Disallow JavaScript files
+        "resolveJsonModule": true,    // Allow importing JSON files
+        "noEmit": false,               // Ensure the server code is emitted
+        "allowSyntheticDefaultImports": true,
+    },
+    "include": ["./src/server.ts"],    // Include only the server entry point
+    "exclude": ["./src/client", "./src/components", "./node_modules"]
+}

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import React, { StrictMode, Suspense, useRef, useState } from 'react';
+import { StrictMode, Suspense, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Canvas } from '@react-three/fiber';
 import { Scene } from './Scene';

@@ -1,15 +1,24 @@
 {
-    "include": [
-        "./src/**/*.tsx"
-, "src/utils/getFresnelMat.ts", "src/utils/latLonToVector3.ts"    ],
     "compilerOptions": {
-        "types": ["@react-three/fiber"],
-        "strict": true,
-        "esModuleInterop": true,
+        "target": "ES2022",
+        "useDefineForClassFields": true,
         "lib": [
-            "dom",
-            "es2015"
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
         ],
-        "jsx": "react",
-    }
+        "module": "ESNext",
+        "skipLibCheck": true,
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true
+    },
 }

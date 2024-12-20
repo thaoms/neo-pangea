@@ -5,12 +5,11 @@ import { useLoader } from '@react-three/fiber';
 export function Earth() {
     const earthGroupRef = useRef<THREE.Group>(null);
 
-    // Load textures using useLoader
     const [earthMap, earthSpec, earthBump, earthLights] = useLoader(THREE.TextureLoader, [
-        './textures/8081_earthmap10k.jpg',
-        './textures/8081_earthspec10k.jpg',
-        './textures/8081_earthbump10k.jpg',
-        './textures/8081_earthlights10k.jpg',
+        '/textures/8081_earthmap10k.jpg',
+        '/textures/8081_earthspec10k.jpg',
+        '/textures/8081_earthbump10k.jpg',
+        '/textures/8081_earthlights10k.jpg',
     ]);
 
     function configureTexture(texture: THREE.Texture) {

@@ -6,7 +6,7 @@ export function SkyBox() {
     const skyBoxRef = useRef<THREE.Mesh>(null);
 
     const [galaxyTexture] = useLoader(THREE.TextureLoader, [
-        './textures/milkywayskybox.png',
+        '/textures/milkywayskybox.png',
     ]);
 
     useFrame(() => {

@@ -10,7 +10,7 @@ interface CurrentLocationProps {
 
 export function CurrentLocation({ markerRadius }: CurrentLocationProps) {
     const flagRef = useRef<THREE.Mesh>(null);
-    const gltf = useLoader(GLTFLoader, './models/flag.gltf');
+    const gltf = useLoader(GLTFLoader, '/models/flag.gltf');
     const [position, setPosition] = useState<THREE.Vector3 | null>(null);
     const [quaternion, setQuaternion] = useState<THREE.Quaternion | null>(null);
 
