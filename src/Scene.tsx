@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import React, { Suspense } from 'react';
+import React, { RefObject, Suspense } from 'react';
 import { Earth } from './components/Earth';
 import { Atmosphere } from './components/Atmosphere';
 import { Clouds } from './components/Clouds';
@@ -33,7 +33,7 @@ export function Scene({ onClick }: { onClick: (text: string) => void }) {
                     <Earth />
                     <Clouds markerRadius={markerRadius} />
                     <Atmosphere markerRadius={markerRadius} />
-                    <SpeechBubbles3D markerRadius={markerRadius} onClick={onClick} earthGroupRef={earthGroupRef} />
+                    <SpeechBubbles3D markerRadius={markerRadius} onClick={onClick} earthGroupRef={earthGroupRef as RefObject<THREE.Group>} />
                     <CurrentLocation markerRadius={markerRadius} />
                 </Suspense>
             </group>
