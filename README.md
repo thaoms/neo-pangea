@@ -2,6 +2,8 @@
 
 > A philosophical and introspective app that helps users explore deep questions about life, identity, society, and existence. Connect with thought-provoking ideas tied to locations around the world.
 
+<img src="./screenshots/image.png" />
+
 ## Table of Contents
 
 - [NeoPangea](#neopangea)
@@ -89,4 +91,4 @@ This project is UNLICENSED
 ## Credits
 
 - Developed by Thomas Van Kerckvoorde.
-- Special thanks to OpenAI, Three.js, NASA and royaly free services where I got all my assets.
+- Special thanks to OpenAI, Three.js, NASA, and royalty-free services for providing assets.
