@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame, useLoader } from '@react-three/fiber';
 
@@ -12,7 +12,7 @@ export function Clouds({ markerRadius }: CloudsProps) {
 
     useFrame(() => {
         if (cloudsRef.current) {
-            cloudsRef.current.rotation.y += 0.00006;
+            cloudsRef.current.rotation.y += 0.00007;
         }
     });
 

@@ -59,7 +59,7 @@ export function SpeechBubble3D({
                 color="orange"
             />
             {isVisible && (
-                <Html position={[0, tooltipOffset, 0]} distanceFactor={2} zIndexRange={[1, 0]}>
+                <Html position={[0, tooltipOffset, 0]} distanceFactor={1} zIndexRange={[1, 0]}>
                     <div className="speech-bubble" style={{ textAlign: 'center' }} onClick={() => onClick(text)}>
                         {text}
                     </div>

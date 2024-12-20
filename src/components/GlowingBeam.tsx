@@ -35,36 +35,35 @@ export function GlowingBeam({
             }
         `,
         fragmentShader: `
-       uniform float time;
-        uniform vec3 color;
-        varying vec2 vUv;
+            uniform float time;
+            uniform vec3 color;
+            varying vec2 vUv;
 
-        void main() {
-            // Add a gradient for the beam
-            vec3 gradientColor = mix(vec3(1.0, 0.84, 0.0), vec3(1.0, 0.4, 0.1), vUv.y); // Bright yellow to warm orange
+            void main() {
+                // Add a gradient for the beam
+                vec3 gradientColor = mix(vec3(1.0, 0.84, 0.0), vec3(1.0, 0.4, 0.1), vUv.y); // Bright yellow to warm orange
 
-            // Tapering effect to make the beam narrower toward the top
-            float taper = smoothstep(0.0, 0.8, vUv.y); // Adjust the smoothstep values for taper strength
+                // Tapering effect to make the beam narrower toward the top
+                float taper = smoothstep(0.0, 0.8, vUv.y); // Adjust the smoothstep values for taper strength
 
-            // Fading effect to reduce brightness towards the top
-            float fade = 1.0 - pow(vUv.y, 1.7); // Exponential falloff toward the top
+                // Fading effect to reduce brightness towards the top
+                float fade = 1.0 - pow(vUv.y, 1.7); // Exponential falloff toward the top
 
-            // Add radial falloff to simulate scattering near the center of the beam
-            float radialFalloff = 1.0 - smoothstep(0.0, 0.5, length(vUv - 0.5)); // Radial gradient from the center
+                // Add radial falloff to simulate scattering near the center of the beam
+                float radialFalloff = 1.0 - smoothstep(0.0, 0.5, length(vUv - 0.5)); // Radial gradient from the center
 
-            // Combine all intensity effects
-            float intensity = taper * fade * radialFalloff * 2.0;
+                // Combine all intensity effects
+                float intensity = taper * fade * radialFalloff * 2.0;
 
-            // Add pulsation effect for a dynamic beam
-            intensity += sin(time * 2.0) * 0.3; // Pulsates between 0.7 and 1.3
+                // Add pulsation effect for a dynamic beam
+                intensity += sin(time * 2.0) * 0.3; // Pulsates between 0.7 and 1.3
 
-            // Introduce soft edges at the top and bottom
-            float edgeSoftness = smoothstep(0.0, 0.05, vUv.y) * smoothstep(1.0, 0.95, vUv.y);
+                // Introduce soft edges at the top and bottom
+                float edgeSoftness = smoothstep(0.0, 0.05, vUv.y) * smoothstep(1.0, 0.95, vUv.y);
 
-            // Final color with all effects combined
-            gl_FragColor = vec4(gradientColor * intensity * edgeSoftness, intensity * taper);
-        }
-
+                // Final color with all effects combined
+                gl_FragColor = vec4(gradientColor * intensity * edgeSoftness, intensity * taper);
+            }
         `,
     }), [color]);
 

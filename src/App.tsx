@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import { StrictMode, Suspense, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { StrictMode, Suspense, useMemo, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Scene } from './Scene';
 import { ResponseField } from './components/ResponseField';
@@ -8,7 +7,7 @@ import { InputSection } from './components/InputSection';
 import { AudioControl } from './components/AudioControl';
 import { useErrorBoundary } from 'use-error-boundary';
 import { Html } from '@react-three/drei';
-import { Bloom, DepthOfField, EffectComposer, Vignette } from '@react-three/postprocessing';
+import { Effects } from './components/Effects';
 
 export function App() {
     const [response, setResponse] = useState('');
@@ -44,6 +43,35 @@ export function App() {
 
     const { ErrorBoundary, didCatch, error } = useErrorBoundary();
 
+    // Memoize the canvas to prevent re-renders
+    const canvasContent = useMemo(() => {
+        return (
+            <Canvas
+                onCreated={({ camera }) => {
+                    cameraRef.current = camera;
+                }}
+                camera={{
+                    fov: 75,
+                    position: [-1.7727639138787286, 0.1852824165419124, -1.1302436480743054],
+                    near: 0.1,
+                    far: 1000,
+                    
+                }}
+                gl={{
+                    pixelRatio: Math.min(window.devicePixelRatio, 2),
+                    antialias: true,
+                    alpha: false,
+                    stencil: false,
+                }}
+            >
+                <Suspense fallback={<Html center>Loading.</Html>}>
+                    <Scene onClick={handleQuestionSubmission} />
+                </Suspense>
+                <Effects />
+            </Canvas>
+        );
+    }, []);
+
     return didCatch
         ? (
                 <div>{error.message}</div>
@@ -51,42 +79,7 @@ export function App() {
         : (
                 <StrictMode>
                     <ErrorBoundary>
-                        <Canvas
-                            onCreated={({ camera }) => {
-                                cameraRef.current = camera;
-                            }}
-                            camera={{ fov: 75, position: [0, 0, 3], near: 0.1, far: 1000 }}
-                            gl={{
-                                pixelRatio: Math.min(window.devicePixelRatio, 2),
-                                powerPreference: 'high-performance',
-                                toneMapping: THREE.ACESFilmicToneMapping,
-                                outputColorSpace: THREE.SRGBColorSpace,
-                                antialias: false,
-                                alpha: false,
-                                stencil: false,
-                                depth: false,
-                            }}
-                        >
-                            <Suspense fallback={<Html center>Loading.</Html>}>
-                                <Scene onClick={handleQuestionSubmission} />
-                            </Suspense>
-                            <EffectComposer multisampling={0} enableNormalPass={false}>
-                                <DepthOfField
-                                    focusDistance={0}
-                                    focalLength={0.08}
-                                    bokehScale={0.5}
-                                    height={480}
-                                />
-                                <Bloom
-                                    luminanceThreshold={0.3}
-                                    luminanceSmoothing={0.6}
-                                    opacity={3}
-                                    intensity={0.5}
-                                    height={300}
-                                />
-                                <Vignette eskil={false} offset={0.1} darkness={1.1} />
-                            </EffectComposer>
-                        </Canvas>
+                        {canvasContent}
                     </ErrorBoundary>
                     <InputSection onSubmit={handleQuestionSubmission} />
                     <ResponseField response={response} loading={loading} onClose={() => setResponse('')} />
@@ -94,5 +87,3 @@ export function App() {
                 </StrictMode>
             );
 }
-
-createRoot(document.getElementById('root')!).render(<App />);
