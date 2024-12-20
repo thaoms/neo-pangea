@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export function InputSection({ onSubmit }: { onSubmit: (question: string) => void }) {
     const [question, setQuestion] = useState('');

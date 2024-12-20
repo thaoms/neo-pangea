@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function ResponseField({ response, loading, onClose }: { response: string; loading: boolean; onClose: () => void }) {
     return (
         <div

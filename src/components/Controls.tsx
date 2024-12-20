@@ -1,4 +1,3 @@
-import React from 'react';
 import { OrbitControls as DreiOrbitControls } from '@react-three/drei';
 
 interface ControlsProps {

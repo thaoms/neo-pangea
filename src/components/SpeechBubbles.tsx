@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import { RefObject } from 'react';
 import { SpeechBubble3D } from './SpeechBubble';
 import * as THREE from 'three';
 

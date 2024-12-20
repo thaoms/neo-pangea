@@ -52,10 +52,10 @@ export function App() {
                 }}
                 camera={{
                     fov: 75,
+                    zoom: 1.35,
                     position: [-1.7727639138787286, 0.1852824165419124, -1.1302436480743054],
                     near: 0.1,
                     far: 1000,
-                    
                 }}
                 gl={{
                     pixelRatio: Math.min(window.devicePixelRatio, 2),

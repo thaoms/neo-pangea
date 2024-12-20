@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { useRef, useEffect, useLayoutEffect, useState } from 'react';
+import { useRef } from 'react';
 import { Suspense } from 'react';
 import { Earth } from './components/Earth';
 import { Atmosphere } from './components/Atmosphere';

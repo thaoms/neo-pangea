@@ -1,4 +1,4 @@
-import { DepthOfField, Bloom, BrightnessContrast, ToneMapping, Vignette, EffectComposer, GodRays, HueSaturation } from '@react-three/postprocessing';
+import { DepthOfField, Bloom, ToneMapping, Vignette, EffectComposer, GodRays } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 import { Suspense, useState } from 'react';
 import { Mesh } from 'three';

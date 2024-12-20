@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import * as THREE from 'three';
 import { getFresnelMat } from '../utils/getFresnelMat'; // Adjust the path as necessary
 
