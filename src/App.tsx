@@ -1,0 +1,74 @@
+import * as THREE from 'three';
+import React, { StrictMode, useRef, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Canvas } from '@react-three/fiber';
+import { Scene } from './Scene';
+import { ResponseField } from './components/ResponseField';
+import { InputSection } from './components/InputSection';
+import { AudioControl } from './components/AudioControl';
+import { useErrorBoundary } from 'use-error-boundary';
+
+export function App() {
+    const [response, setResponse] = useState('');
+    const [loading, setLoading] = useState(false);
+    const cameraRef = useRef<THREE.Camera | null>(null);
+
+    const handleQuestionSubmission = async (question: string) => {
+        setLoading(true);
+        setResponse('');
+        try {
+            const res = await fetch('http://localhost:3000/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setResponse(data.reply);
+            }
+            else {
+                setResponse(`Error: ${data.error}`);
+            }
+        }
+        catch (_error) {
+            setResponse('Failed to fetch response from the server.');
+        }
+        finally {
+            setLoading(false);
+        }
+    };
+
+    const { ErrorBoundary, didCatch, error } = useErrorBoundary();
+
+    return didCatch
+        ? (
+                <div>{error.message}</div>
+            )
+        : (
+
+                <StrictMode>
+                    <ErrorBoundary>
+                        <Canvas
+                            onCreated={({ camera }) => {
+                                cameraRef.current = camera;
+                            }}
+                            camera={{ fov: 75, position: [0, 0, 3], near: 0.1, far: 1000 }}
+                            gl={{
+                                antialias: true,
+                                toneMapping: THREE.ACESFilmicToneMapping,
+                                outputColorSpace: THREE.SRGBColorSpace,
+                            }}
+                        >
+                            <Scene onClick={handleQuestionSubmission} />
+                        </Canvas>
+                    </ErrorBoundary>
+                    <InputSection onSubmit={handleQuestionSubmission} />
+                    <ResponseField response={response} loading={loading} onClose={() => setResponse('')} />
+                    <AudioControl audioFile="./audio/ambient-space-noise-55472.mp3" />
+                </StrictMode>
+            );
+}
+
+createRoot(document.getElementById('root')!).render(<App />);

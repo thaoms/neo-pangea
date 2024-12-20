@@ -4,17 +4,33 @@
 
 @keyframes float {
     0%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(0deg);
     }
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-10px) rotate(1deg);
     }
 }
 
 .speech-bubble {
-    @apply absolute text-gray-700 bg-white font-medium p-4 rounded-lg shadow-lg transition-opacity bg-opacity-80;
-    animation: float 3s ease-in-out infinite;
-    cursor: pointer;
+    @apply absolute text-white tracking-wider font-medium p-6 rounded-2xl shadow-xl transition-opacity cursor-pointer z-20 bg-opacity-90 w-80 text-lg;
+    background: linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3));
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 150, 150, 0.4);
+    backdrop-filter: blur(10px);
+    animation: float 4s ease-in-out infinite;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+@keyframes dreamy-glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 200, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 200, 255, 0.4);
+    }
+}
+
+.speech-bubble:hover {
+    animation: dreamy-glow 2s infinite;
 }
 
 @keyframes spin {
