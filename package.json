@@ -16,7 +16,7 @@
     "keywords": [],
     "author": "Thomas Van Kerckvoorde",
     "private": true,
-    "license": "UNLICENSED",
+    "license": "MIT",
     "type": "module",
     "devDependencies": {
         "@stylistic/eslint-plugin": "^2.12.1",

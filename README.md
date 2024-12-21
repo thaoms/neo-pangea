@@ -86,9 +86,9 @@ We welcome contributions! Please follow these steps:
 
 ## License
 
-This project is UNLICENSED
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Credits
 
-- Developed by Thomas Van Kerckvoorde.
-- Special thanks to OpenAI, Three.js, NASA, and royalty-free services for providing assets.
+This project uses several open-source libraries, frameworks, and assets. 
+Please refer to the [CREDITS.md](CREDITS.md) file for detailed acknowledgments.
