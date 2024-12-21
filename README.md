@@ -1,6 +1,8 @@
 # NeoPangea
 
-> A philosophical and introspective app that helps users explore deep questions about life, identity, society, and existence. Connect with thought-provoking ideas tied to locations around the world.
+> A philosophical and introspective app that helps users explore deep questions about life, identity, society, and existence. Connect with thought-provoking ideas tied to locations around the world. Each question is inspired by cultural, historical, or societal themes specific to the location it represents.
+> 
+> This project started as an experiment in exploring philosophical questions, technology, and creative expression. It grew during a period where I found myself deeply reflecting on many of the same questions posed in the app. This intersection of personal curiosity and technical growth gave life to NeoPangea.
 
 <img src="./screenshots/image.png" />
 
@@ -20,10 +22,11 @@
 
 ## Features
 
-- Explore deep philosophical questions tied to specific locations.
-- Interactive and engaging interface for reflecting on life's big questions.
+- Explore deep philosophical questions tied to specific locations worldwide.
+- Questions are inspired by cultural, historical, and societal themes unique to each region.
+- Interactive and engaging interface for reflecting on life's biggest questions.
 - Server-client architecture for seamless performance and scalability.
-- Built-in linting for maintaining clean and consistent code.
+- Built-in linting and type checking for maintaining clean and consistent code.
 
 ## Installation
 

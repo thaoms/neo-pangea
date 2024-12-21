@@ -23,6 +23,13 @@ export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: Speech
         { text: 'Kunnen mensen echt veranderen?', lat: 28.6, lon: 77.2 }, // New Delhi, India
         { text: 'Wat betekent het om vrij te zijn?', lat: 52.5, lon: 13.4 }, // Berlijn, Duitsland
         { text: 'Waarom vechten mensen om macht?', lat: 33.7, lon: -84.4 }, // Atlanta, VS
+        { text: 'Hoe definieert cultuur onze identiteit?', lat: 48.8, lon: 2.3 }, // Parijs, Frankrijk
+        { text: 'Wat betekent spiritualiteit in de moderne wereld?', lat: 27.9, lon: 86.9 }, // Kathmandu, Nepal
+        { text: 'Waarom bestaan grenzen als mensen hetzelfde zijn?', lat: 55.7, lon: 37.6 }, // Moskou, Rusland
+        { text: 'Wat betekent gerechtigheid in een complexe wereld?', lat: 43.6, lon: -79.3 }, // Toronto, Canada
+        { text: 'Hoe beïnvloedt technologie onze menselijkheid?', lat: 1.3, lon: 103.8 }, // Singapore
+        { text: 'Wat kunnen we leren van oude tradities?', lat: -13.5, lon: -71.9 }, // Cusco, Peru
+        { text: 'Hoe bepalen waarden ons dagelijks leven?', lat: 51.5, lon: -0.1 }, // Londen, VK
     ];
 
     return (
