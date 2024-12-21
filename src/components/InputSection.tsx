@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-export function InputSection({ onSubmit }: { onSubmit: (question: string) => void }) {
+export function InputSection({ onSubmit }: { onSubmit: (question: { text: string }) => void }) {
     const [question, setQuestion] = useState('');
 
     const handleSubmit = () => {
         if (question.trim()) {
-            onSubmit(question.trim());
+            onSubmit({ text: question.trim() });
             setQuestion('');
         }
     };

@@ -1,4 +1,20 @@
+import { useEffect } from 'react';
+
 export function ResponseField({ question, response, loading, onClose }: { question: string; response: string; loading: boolean; onClose: () => void }) {
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
+
     return (
         <div
             id="response-field"
