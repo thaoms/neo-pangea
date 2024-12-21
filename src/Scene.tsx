@@ -12,6 +12,7 @@ import { useFrame } from '@react-three/fiber';
 import { SpeechBubbles3D } from './components/SpeechBubbles';
 import { Loader } from './components/Loader';
 import './css/styles.css';
+import { Moon } from './components/Moon';
 
 const markerRadius = 1.0;
 
@@ -37,6 +38,7 @@ export function Scene({ onClick }: { onClick: (text: string) => void }) {
                     <CurrentLocation markerRadius={markerRadius} />
                 </Suspense>
             </group>
+            <Moon earthRef={earthGroupRef} />
             <SkyBox />
         </Suspense>
     );

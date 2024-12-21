@@ -1,13 +1,21 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { OpenAI } from 'openai';
-import cors from 'cors';
+import cors from 'cors'; // Import CORS
+import helmet from 'helmet';
+import { rateLimit } from 'express-rate-limit';
 
 const app = express();
 const port = 3000;
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+});
 
+app.use(cors({ origin: 'http://localhost:3001' }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(helmet());
+app.use(limiter);
 
 const openai = new OpenAI();
 
@@ -32,12 +40,15 @@ Richtlijnen:
 
 Geef altijd prioriteit aan doordachte en toegankelijke communicatie, zodat gebruikers zich gehoord en begeleid voelen, zonder oordeel of vooringenomenheid.`;
 
-// Endpoint to handle questions
 app.post('/ask', async (req, res) => {
     const { question } = req.body;
 
     if (!question) {
         return res.status(400).json({ error: 'Question is required.' });
+    }
+
+    if (typeof question !== 'string' || question.length > 500) {
+        return res.status(400).json({ error: 'Invalid input.' });
     }
 
     try {

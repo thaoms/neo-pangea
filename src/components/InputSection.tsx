@@ -13,7 +13,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: string) => voi
     return (
         <div
             id="input-container"
-            className="fixed top-3/4 -translate-x-1/2 left-1/2 p-6 rounded-3xl shadow-xl w-96 bg-gradient-to-r from-blue-900/50 via-purple-800/40 to-pink-700/30 backdrop-blur-lg space-y-4"
+            className="fixed top-3/4 -translate-x-1/2 left-1/2 p-6 rounded-3xl shadow-xl w-96 bg-gradient-to-r from-blue-900/50 via-purple-800/40 to-pink-700/30 backdrop-blur-lg space-y-4 z-50"
         >
             <input
                 id="question"

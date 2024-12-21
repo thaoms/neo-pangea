@@ -13,10 +13,12 @@ export function App() {
     const [response, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
     const cameraRef = useRef<THREE.Camera | null>(null);
+    const questionRef = useRef('');
 
     const handleQuestionSubmission = async (question: string) => {
         setLoading(true);
         setResponse('');
+        questionRef.current = '';
         try {
             const res = await fetch('http://localhost:3000/ask', {
                 method: 'POST',
@@ -28,6 +30,7 @@ export function App() {
             const data = await res.json();
             if (res.ok) {
                 setResponse(data.reply);
+                questionRef.current = question;
             }
             else {
                 setResponse(`Error: ${data.error}`);
@@ -82,7 +85,7 @@ export function App() {
                         {canvasContent}
                     </ErrorBoundary>
                     <InputSection onSubmit={handleQuestionSubmission} />
-                    <ResponseField response={response} loading={loading} onClose={() => setResponse('')} />
+                    <ResponseField question={questionRef.current} response={response} loading={loading} onClose={() => setResponse('')} />
                     <AudioControl audioFile="./audio/ambient-space-noise-55472.mp3" />
                 </StrictMode>
             );

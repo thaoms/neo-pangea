@@ -78,7 +78,6 @@ export function GlowingBeam({
 
     return (
         <group>
-            {/* Glowing Beam */}
             <mesh ref={beamRef} position={position.toArray()} onClick={onClick}>
                 <cylinderGeometry args={[radius, radius, height, 32, 1, true]} />
                 <shaderMaterial
@@ -88,16 +87,6 @@ export function GlowingBeam({
                     depthWrite={false}
                 />
             </mesh>
-
-            {/* Light Source */}
-            <pointLight
-                ref={lightRef}
-                position={position.toArray()}
-                color={color}
-                intensity={intensity}
-                distance={10} // Increase distance for a larger effect
-                decay={0}
-            />
         </group>
     );
 }

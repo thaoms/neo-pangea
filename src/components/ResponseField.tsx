@@ -1,4 +1,4 @@
-export function ResponseField({ response, loading, onClose }: { response: string; loading: boolean; onClose: () => void }) {
+export function ResponseField({ question, response, loading, onClose }: { question: string; response: string; loading: boolean; onClose: () => void }) {
     return (
         <div
             id="response-field"
@@ -30,6 +30,7 @@ export function ResponseField({ response, loading, onClose }: { response: string
             >
             </div>
 
+            <h1 className="text-white text-opacity-90 font-medium text-lg leading-6 transition-opacity duration-500 text-wrap pr-5">{question}</h1>
             <pre
                 id="response-text"
                 className={`text-white text-opacity-90 font-medium text-sm leading-6 transition-opacity duration-500 text-wrap pr-5 ${
