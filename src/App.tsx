@@ -8,6 +8,7 @@ import { AudioControl } from './components/AudioControl';
 import { useErrorBoundary } from 'use-error-boundary';
 import { Html } from '@react-three/drei';
 import { Effects } from './components/Effects';
+import { Question } from './components/SpeechBubble';
 
 export function App() {
     const [response, setResponse] = useState('');
@@ -15,10 +16,13 @@ export function App() {
     const cameraRef = useRef<THREE.Camera | null>(null);
     const questionRef = useRef('');
 
-    const handleQuestionSubmission = async (question: string) => {
+    const handleQuestionSubmission = async (questionRaw: Question) => {
         setLoading(true);
         setResponse('');
         questionRef.current = '';
+
+        const question = questionRaw.text + ' lat:' + questionRaw.lat + ' lon:' + questionRaw.lon;
+
         try {
             const res = await fetch('http://localhost:3000/ask', {
                 method: 'POST',
@@ -27,10 +31,12 @@ export function App() {
                 },
                 body: JSON.stringify({ question }),
             });
+
             const data = await res.json();
+
             if (res.ok) {
                 setResponse(data.reply);
-                questionRef.current = question;
+                questionRef.current = questionRaw.text;
             }
             else {
                 setResponse(`Error: ${data.error}`);

@@ -18,7 +18,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: string) => voi
             <input
                 id="question"
                 type="text"
-                placeholder="Waar zit je mee?"
+                placeholder="What keeps your mind occupied?"
                 value={question}
                 onChange={e => setQuestion(e.target.value)}
                 className="w-full p-4 rounded-lg bg-white bg-opacity-10 text-white placeholder-gray-300 focus:outline-none focus:ring-4 focus:ring-pink-500 shadow-lg"
@@ -30,7 +30,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: string) => voi
                 onClick={handleSubmit}
                 className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold shadow-lg hover:from-pink-600 hover:to-purple-500 transition-all duration-300 ease-in-out hover:scale-105 focus:ring-4 focus:ring-purple-300"
             >
-                Vraag het mij!
+                Ask!
             </button>
         </div>
     );

@@ -1,28 +1,30 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Html } from '@react-three/drei';
 import { latLonToVector3 } from '../utils/latLonToVector3';
 import { GlowingBeam } from './GlowingBeam';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
-interface SpeechBubble3DProps {
+export type Question = {
     text: string;
     lat: number;
     lon: number;
+};
+
+interface SpeechBubble3DProps {
+    question: Question;
     markerRadius: number;
     earthGroupRef: React.RefObject<THREE.Group>; // Reference to the Earth group
-    onClick: (text: string) => void;
+    onClick: (question: Question) => void;
 }
 
 export function SpeechBubble3D({
-    text,
-    lat,
-    lon,
+    question,
     markerRadius,
     earthGroupRef,
     onClick,
 }: SpeechBubble3DProps) {
-    const position = useMemo(() => latLonToVector3(lat, lon, markerRadius), [lat, lon, markerRadius]);
+    const position = useMemo(() => latLonToVector3(question.lat, question.lon, markerRadius), [question.lat, question.lon, markerRadius]);
     const normal = useMemo(() => position.clone().normalize(), [position]);
     const quaternion = useMemo(() => {
         const up = new THREE.Vector3(0, 1, 0); // Default "up" direction for the beam
@@ -32,6 +34,13 @@ export function SpeechBubble3D({
 
     const tooltipOffset = 0.3;
     const [isVisible, setIsVisible] = useState(true);
+    const [isPopped, setIsPopped] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setIsPopped(true), 5000); // Match pop animation duration
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     useFrame(({ camera }) => {
         if (!earthGroupRef.current) return;
@@ -59,9 +68,17 @@ export function SpeechBubble3D({
                 color="orange"
             />
             {isVisible && (
-                <Html position={[0, tooltipOffset, 0]} distanceFactor={1} zIndexRange={[1, 0]}>
-                    <div className="speech-bubble" style={{ textAlign: 'center' }} onClick={() => onClick(text)}>
-                        {text}
+                <Html
+                    position={[0, tooltipOffset, 0]}
+                    distanceFactor={1}
+                    zIndexRange={[1, 0]}
+                >
+                    <div
+                        className="speech-bubble"
+                        style={{ textAlign: 'center' }}
+                        onClick={() => onClick(question)}
+                    >
+                        {question.text}
                     </div>
                 </Html>
             )}

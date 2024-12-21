@@ -13,10 +13,11 @@ import { SpeechBubbles3D } from './components/SpeechBubbles';
 import { Loader } from './components/Loader';
 import './css/styles.css';
 import { Moon } from './components/Moon';
+import { Question } from './components/SpeechBubble';
 
 const markerRadius = 1.0;
 
-export function Scene({ onClick }: { onClick: (text: string) => void }) {
+export function Scene({ onClick }: { onClick: (question: Question) => void }) {
     const earthGroupRef = useRef<THREE.Group>(null);
 
     useFrame(() => {
