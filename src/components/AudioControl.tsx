@@ -6,7 +6,7 @@ interface AudioControlProps {
 
 export function AudioControl({ audioFile }: AudioControlProps) {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
 
     const toggleAudio = () => {
         if (audioRef.current) {
@@ -29,7 +29,7 @@ export function AudioControl({ audioFile }: AudioControlProps) {
             onClick={toggleAudio}
         >
             <span id="audio-icon" className="text-lg">{isPlaying ? '🔊' : '🔈'}</span>
-            <audio ref={audioRef} src={audioFile} loop preload="auto" />
+            <audio ref={audioRef} src={audioFile} autoPlay loop preload="auto" />
         </div>
     );
 }

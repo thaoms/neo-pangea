@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Html } from '@react-three/drei';
 import { latLonToVector3 } from '../utils/latLonToVector3';
 import { GlowingBeam } from './GlowingBeam';
@@ -7,8 +7,8 @@ import { useFrame } from '@react-three/fiber';
 
 export type Question = {
     text: string;
-    lat: number;
-    lon: number;
+    lat?: number;
+    lon?: number;
 };
 
 interface SpeechBubble3DProps {
@@ -34,13 +34,6 @@ export function SpeechBubble3D({
 
     const tooltipOffset = 0.3;
     const [isVisible, setIsVisible] = useState(true);
-    const [isPopped, setIsPopped] = useState(false);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => setIsPopped(true), 5000); // Match pop animation duration
-
-        return () => clearTimeout(timeout);
-    }, []);
 
     useFrame(({ camera }) => {
         if (!earthGroupRef.current) return;
@@ -71,7 +64,7 @@ export function SpeechBubble3D({
                 <Html
                     position={[0, tooltipOffset, 0]}
                     distanceFactor={1}
-                    zIndexRange={[1, 0]}
+                    zIndexRange={[20, 0]}
                 >
                     <div
                         className="speech-bubble"

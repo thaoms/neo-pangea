@@ -8,7 +8,7 @@ interface MoonProps {
     speed?: number;
 }
 
-export function Moon({ earthRef, distance = 9, speed = 0.000266 }: MoonProps) {
+export function Moon({ earthRef, distance = 3, speed = 0.000266 }: MoonProps) {
     const moonGroupRef = useRef<THREE.Group>(null);
     const moonMeshRef = useRef<THREE.Mesh>(null);
 
@@ -17,7 +17,17 @@ export function Moon({ earthRef, distance = 9, speed = 0.000266 }: MoonProps) {
         '/textures/moonbump4k.jpg',
     ]);
 
-    const moonAngle = useRef(0);
+    function configureTexture(texture: THREE.Texture) {
+        texture.wrapS = THREE.RepeatWrapping; // Seamless horizontal wrapping
+        texture.wrapT = THREE.ClampToEdgeWrapping; // Prevent vertical wrapping
+
+        return texture;
+    }
+
+    configureTexture(moonMap);
+    configureTexture(moonBump);
+
+    const moonAngle = useRef(-0.8);
     const inclination = THREE.MathUtils.degToRad(5); // 5-degree orbital tilt
     const rotationTilt = THREE.MathUtils.degToRad(6.7); // Moon's axial tailt
 
@@ -34,14 +44,14 @@ export function Moon({ earthRef, distance = 9, speed = 0.000266 }: MoonProps) {
 
         // Rotate the Moon on its own axis
         if (moonMeshRef.current) {
-            moonMeshRef.current.rotation.y += speed;
+            moonMeshRef.current.rotation.y += speed + 0.0015;
         }
     });
 
     return (
         <group ref={moonGroupRef}>
             <mesh ref={moonMeshRef} rotation={[rotationTilt, 0, 0]} castShadow receiveShadow>
-                <icosahedronGeometry args={[0.27, 50]} />
+                <icosahedronGeometry args={[0.17, 12]} />
                 <meshPhongMaterial
                     map={moonMap}
                     bumpMap={moonBump}
@@ -50,7 +60,7 @@ export function Moon({ earthRef, distance = 9, speed = 0.000266 }: MoonProps) {
                     shininess={6}
                     specular={new THREE.Color(0.5, 0.5, 0.5)}
                     emissive="#444444"
-                    emissiveIntensity={0.3}
+                    emissiveIntensity={0.8}
                 />
             </mesh>
         </group>

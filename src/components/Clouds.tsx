@@ -20,9 +20,10 @@ export function Clouds({ markerRadius }: CloudsProps) {
         <mesh
             scale={[1.003, 1.003, 1.003]}
             ref={cloudsRef}
+            castShadow={true}
         >
             <icosahedronGeometry
-                args={[markerRadius, 50]}
+                args={[markerRadius, 12]}
             />
             <meshStandardMaterial
                 map={cloudTexture}

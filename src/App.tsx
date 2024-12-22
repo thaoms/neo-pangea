@@ -1,13 +1,11 @@
 import * as THREE from 'three';
-import { StrictMode, Suspense, useMemo, useRef, useState } from 'react';
+import { StrictMode, useMemo, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Scene } from './Scene';
 import { ResponseField } from './components/ResponseField';
 import { InputSection } from './components/InputSection';
 import { AudioControl } from './components/AudioControl';
 import { useErrorBoundary } from 'use-error-boundary';
-import { Html } from '@react-three/drei';
-import { Effects } from './components/Effects';
 import { Question } from './components/SpeechBubble';
 
 export function App() {
@@ -73,10 +71,7 @@ export function App() {
                     stencil: false,
                 }}
             >
-                <Suspense fallback={<Html center>Loading.</Html>}>
-                    <Scene onClick={handleQuestionSubmission} />
-                </Suspense>
-                <Effects />
+                <Scene onClick={handleQuestionSubmission} />
             </Canvas>
         );
     }, []);

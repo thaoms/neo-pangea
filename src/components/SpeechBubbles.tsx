@@ -38,8 +38,6 @@ export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: Speech
         getQuestions();
     }, []);
 
-    console.log('render bobs', questions)
-
     return (
         <>
             {questions.map((data, index) => (

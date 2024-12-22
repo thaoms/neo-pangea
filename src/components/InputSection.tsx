@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Question } from './SpeechBubble';
 
-export function InputSection({ onSubmit }: { onSubmit: (question: { text: string }) => void }) {
+export function InputSection({ onSubmit }: { onSubmit: (question: Question) => void }) {
     const [question, setQuestion] = useState('');
 
     const handleSubmit = () => {

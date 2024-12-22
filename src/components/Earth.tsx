@@ -26,10 +26,10 @@ export function Earth() {
     configureTexture(earthLights);
 
     return (
-        <group ref={earthGroupRef}>
+        <group ref={earthGroupRef} receiveShadow={true}>
             <mesh>
                 <icosahedronGeometry
-                    args={[1, 50]}
+                    args={[1, 12]}
                 />
                 <meshPhongMaterial
                     map={earthMap}
@@ -40,7 +40,7 @@ export function Earth() {
             </mesh>
             <mesh>
                 <icosahedronGeometry
-                    args={[1, 50]}
+                    args={[1, 12]}
                 />
                 <meshBasicMaterial
                     map={earthLights}

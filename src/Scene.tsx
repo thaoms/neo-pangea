@@ -14,6 +14,7 @@ import { Loader } from './components/Loader';
 import './css/styles.css';
 import { Moon } from './components/Moon';
 import { Question } from './components/SpeechBubble';
+import { Effects } from './components/Effects';
 
 const markerRadius = 1.0;
 
@@ -28,7 +29,7 @@ export function Scene({ onClick }: { onClick: (question: Question) => void }) {
 
     return (
         <Suspense fallback={<Loader />}>
-            <Controls maxDistance={10} />
+            <Controls maxDistance={5} />
             <Starfield numStars={2000} />
             <group ref={earthGroupRef} rotation={[THREE.MathUtils.degToRad(-23.4), 0, 0]}>
                 <Suspense fallback={<Loader />}>
@@ -41,6 +42,7 @@ export function Scene({ onClick }: { onClick: (question: Question) => void }) {
             </group>
             <Moon earthRef={earthGroupRef} />
             <SkyBox />
+            <Effects />
         </Suspense>
     );
 }

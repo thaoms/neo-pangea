@@ -98,7 +98,7 @@ Vary the questions so that they remain philosophically, socially, or culturally 
 Add current context if applicable to the location (e.g., conflict zones, technological hubs, cultural events, etc.).
 Use cities distributed across the world, and ensure the coordinates are consistent and not too close to one another.
 
-Keep the questions short and concise, without unnecessary explanation or complex wording, so they are accessible to everyone. Ensure the locations are well-distributed across the globe and not clustered too closely together.
+Keep the questions short and concise, without unnecessary explanation or complex wording, so they are accessible to everyone. Ensure the locations are well-distributed across the globe and not clustered too closely together. 
 
 Examples (do not copy, for inspiration only):
 
@@ -125,7 +125,7 @@ const questions = [
     { text: 'What does love mean in an ever-faster changing world?', lat: 41.9, lon: 12.5 }, // Rome, Italy
 ];
 
-Generate a new, original array with a maximum of 15 questions that meet the above criteria. Do not copy the examples literally and make the questions unique and relevant to the location.
+Generate a new, original array with a maximum of 15 questions that meet the above criteria. Do not copy the examples literally and make the questions unique and relevant to the location. Important: Ensure there is a minimum distance of 2000 km between any two locations to avoid clustering.
 `;
 
 app.get('/get/questions', async (_req, res) => {

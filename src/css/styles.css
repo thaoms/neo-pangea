@@ -35,7 +35,7 @@
 }
 
 .speech-bubble {
-    @apply absolute text-white tracking-wider font-medium p-6 rounded-2xl shadow-xl cursor-pointer z-20 bg-opacity-90 w-80 text-lg;
+    @apply absolute text-white tracking-wider font-medium p-6 rounded-2xl shadow-xl cursor-pointer bg-opacity-90 w-80 text-lg select-none;
     background: linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3));
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 150, 150, 0.4);
     backdrop-filter: blur(10px);
