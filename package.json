@@ -5,7 +5,7 @@
     "scripts": {
         "start-server": "node --experimental-strip-types --experimental-transform-types --env-file=.env.local src/api/index.ts",
         "build-server": "tsc -p tsconfig.server.json",
-        "start-production": "node dist/api/index.js",
+        "start-production": "node ./api/index.js",
         "start-client": "vite",
         "build-client": "vite build",
         "preview-client": "vite preview",

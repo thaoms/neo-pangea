@@ -1,7 +1,7 @@
 {
     "extends": "./tsconfig.json",       // Inherit settings from the main tsconfig.json
     "compilerOptions": {
-        "outDir": "./dist/api",            // Output directory for compiled server code
+        "outDir": "./api",            // Output directory for compiled server code
         "module": "ESNext",            // Use ES modules
         "target": "ES2020",            // Target modern JavaScript
         "moduleResolution": "Node",   // Resolve modules like Node.js
