@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start-server": "node --experimental-strip-types --experimental-transform-types --env-file=.env src/server.ts",
+        "start-server": "node --experimental-strip-types --experimental-transform-types --env-file=.env.local src/server.ts",
         "build-server": "tsc -p tsconfig.server.json",
         "start-production": "node dist/server.js",
         "start-client": "vite",

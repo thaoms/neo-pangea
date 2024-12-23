@@ -11,9 +11,11 @@ interface SpeechBubbles3DProps {
 export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: SpeechBubbles3DProps) {
     const [questions, setQuestions] = useState([]);
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const getQuestions = async () => {
         try {
-            const res = await fetch('http://localhost:3000/get/questions', {
+            const res = await fetch(`${apiUrl}/api/get/questions`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

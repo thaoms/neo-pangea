@@ -14,6 +14,8 @@ export function App() {
     const cameraRef = useRef<THREE.Camera | null>(null);
     const questionRef = useRef('');
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleQuestionSubmission = async (questionRaw: Question) => {
         setLoading(true);
         setResponse('');
@@ -22,7 +24,7 @@ export function App() {
         const question = questionRaw.text + ' lat:' + questionRaw.lat + ' lon:' + questionRaw.lon;
 
         try {
-            const res = await fetch('http://localhost:3000/ask', {
+            const res = await fetch(`${apiUrl}/api/ask`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

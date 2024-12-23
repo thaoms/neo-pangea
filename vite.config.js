@@ -18,6 +18,5 @@ export default () => {
                 localsConvention: 'camelCaseOnly',
             },
         },
-        envDir: '../../',
     });
 };

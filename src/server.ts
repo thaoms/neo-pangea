@@ -6,13 +6,15 @@ import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const clientUrl = process.env.CLIENT_URL || 'http://localhost:3001';
+
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
 });
 
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors({ origin: clientUrl }));
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(limiter);
@@ -42,7 +44,7 @@ Guidelines:
 - Limit yourself to two paragraphs
 `;
 
-app.post('/ask', async (req, res) => {
+app.post('/api/ask', async (req, res) => {
     const { question } = req.body;
 
     if (!question) {
@@ -128,7 +130,7 @@ const questions = [
 Generate a new, original array with a maximum of 15 questions that meet the above criteria. Do not copy the examples literally and make the questions unique and relevant to the location. Important: Ensure there is a minimum distance of 2000 km between any two locations to avoid clustering.
 `;
 
-app.get('/get/questions', async (_req, res) => {
+app.get('/api/get/questions', async (_req, res) => {
     try {
         const response = await openai.chat.completions.create({
             model: 'gpt-4o',
