@@ -32,7 +32,7 @@ export function Effects() {
                         height={300}
                     />
                     <Bloom
-                        luminanceThreshold={0.7}
+                        luminanceThreshold={0.6}
                         luminanceSmoothing={0.6}
                         opacity={3}
                         intensity={0.5}
