@@ -13,8 +13,8 @@ export function Moon({ earthRef, distance = 3, speed = 0.000266 }: MoonProps) {
     const moonMeshRef = useRef<THREE.Mesh>(null);
 
     const [moonMap, moonBump] = useLoader(THREE.TextureLoader, [
-        '/textures/moonmap4k.jpg',
-        '/textures/moonbump4k.jpg',
+        '/textures/moonmap4k-min.jpg',
+        '/textures/moonbump4k-min.jpg',
     ]);
 
     function configureTexture(texture: THREE.Texture) {

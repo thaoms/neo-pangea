@@ -22,12 +22,12 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     };
 
     const [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture] = useLoader(THREE.TextureLoader, [
-        '/textures/8081_earthmap10k.jpg',
-        '/textures/8081_earthspec10k.jpg',
-        '/textures/8081_earthbump10k.jpg',
-        '/textures/8081_earthlights10k.jpg',
-        '/textures/8081_oceanmap.jpg',
-        '/textures/8081_earthcloudmaptrans.jpg',
+        '/textures/8081_earthmap10k-min.jpg',
+        '/textures/8081_earthspec10k-min.jpg',
+        '/textures/8081_earthbump10k-min.jpg',
+        '/textures/8081_earthlights10k-min.jpg',
+        '/textures/8081_oceanmap-min.jpg',
+        '/textures/8081_earthcloudmaptrans-min.jpg',
     ]);
 
     function configureTexture(texture: THREE.Texture) {
