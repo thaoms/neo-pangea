@@ -43,9 +43,6 @@ export function Sun({ distance = 30, speed = 0.0002, onRefReady }: SunProps) {
                 ref={sunLightRef}
                 color={0xffffff}
                 intensity={4} // Increased intensity for realism
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
             />
             <mesh ref={sunSphereRef}>
                 <sphereGeometry args={[0.6, 64, 64]} />

@@ -54,6 +54,7 @@ export function App() {
     const canvasContent = useMemo(() => {
         return (
             <Canvas
+                shadows
                 onCreated={({ camera }) => {
                     cameraRef.current = camera;
                 }}
