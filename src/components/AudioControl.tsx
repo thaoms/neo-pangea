@@ -24,8 +24,7 @@ export function AudioControl({ audioFile }: AudioControlProps) {
     return (
         <div
             id="audio-toggle"
-            style={{ background: 'linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3))' }}
-            className="fixed bottom-5 left-5 w-12 h-12 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:bg-gray-700 transition"
+            className="fixed bottom-5 left-5 w-12 h-12 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:bg-gradient-to-l transition bg-gradient-to-r from-blue-900/50 via-purple-800/40 to-pink-700/30"
             onClick={toggleAudio}
         >
             <span id="audio-icon" className="text-lg">{isPlaying ? '🔊' : '🔈'}</span>

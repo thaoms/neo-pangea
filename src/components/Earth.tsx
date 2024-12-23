@@ -21,7 +21,6 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         metalness: 0.1,
     };
 
-    // Load textures
     const [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture] = useLoader(THREE.TextureLoader, [
         '/textures/8081_earthmap10k.jpg',
         '/textures/8081_earthspec10k.jpg',
@@ -34,7 +33,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     function configureTexture(texture: THREE.Texture) {
         texture.offset.set(0.5, 0); // Offset for longitude alignment (center on 0°)
         texture.wrapS = THREE.RepeatWrapping; // Seamless horizontal wrapping
-        texture.wrapT = THREE.RepeatWrapping; // Prevent vertical wrapping
+        texture.wrapT = THREE.ClampToEdgeWrapping; // Prevent vertical wrapping
 
         return texture;
     }
@@ -132,7 +131,6 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                     <SpeechBubbles3D markerRadius={markerRadius} onClick={onClick} earthGroupRef={earthGroupRef} />
                     <CurrentLocation markerRadius={markerRadius} />
                 </Suspense>
-
             </group>
             <mesh
                 ref={cloudsRef}
