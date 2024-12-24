@@ -7,19 +7,17 @@
 <img src="./screenshots/image.png" />
 
 ## Table of Contents
-
 - [NeoPangea](#neopangea)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
+    - [Configuration](#configuration)
     - [Development](#development)
-    - [Production](#production)
-  - [Configuration](#configuration)
+    - [Production / Vercel Deployment](#production--vercel-deployment)
   - [Contributing](#contributing)
   - [License](#license)
   - [Credits](#credits)
-
 ## Features
 
 - Explore deep philosophical questions tied to specific locations worldwide.
@@ -42,8 +40,15 @@
 4. Install dependencies:
    
    `pnpm i`
+5.  If you haven’t installed the Vercel CLI globally, run: `pnpm i -g vercel`
 
 ## Usage
+
+### Configuration
+
+- You need to fetch the `.env.local` with variables from Vercel:
+  - `vercel env pull`
+
 ### Development
 
 1. Lint the project:
@@ -51,25 +56,21 @@
    `pnpm lint`
 2. Start the server:
    
-   `pnpm start-server`
-3. Start the client:
+   `pnpm type-check`
+3. Start the app:
    
-   `pnpm start-client`
+   `vercel dev`
 
-### Production
+### Production / Vercel Deployment
 1. `pnpm build`
+      
+2. `pnpm preview`
+
+3. Deploy to Vercel
+   1. If you haven’t installed the Vercel CLI globally, run: `pnpm i -g vercel`
+   2. Then, from the project root directory: `vercel`
    
-2. `pnpm start-production`
-   
-3. `pnpm preview-client`
-
-## Configuration
-
-- You need to create your own `.env` file with the following variable:
-  - OPENAI_API_KEY: Your OpenAI API key.
-
-Example `.env` file:
-`OPENAI_API_KEY=your-api-key`
+   Follow the prompts (or use `vercel --prod` for production).
 
 ## Contributing
 
