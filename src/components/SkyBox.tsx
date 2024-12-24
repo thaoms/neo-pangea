@@ -1,13 +1,16 @@
 import * as THREE from 'three';
 import { useRef } from 'react';
 import { useFrame, useLoader } from '@react-three/fiber';
+import { useIsMobile } from '../utils/useIsMobile';
 
 export function SkyBox() {
     const skyBoxRef = useRef<THREE.Mesh>(null);
 
-    const [galaxyTexture] = useLoader(THREE.TextureLoader, [
-        '/textures/milkywayskybox-min.png',
-    ]);
+    const galaxyTexturePath = useIsMobile()
+        ? '/textures/2k/milkywayskybox.jpg'
+        : '/textures/milkywayskybox.png';
+
+    const [galaxyTexture] = useLoader(THREE.TextureLoader, [galaxyTexturePath]);
 
     useFrame(() => {
         if (skyBoxRef.current) {

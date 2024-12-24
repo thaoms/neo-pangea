@@ -6,6 +6,7 @@ import { CurrentLocation } from './CurrentLocation';
 import { Question } from './SpeechBubble';
 import { Atmosphere } from './Atmosphere';
 import { Loader } from './Loader';
+import { useIsMobile } from '../utils/useIsMobile';
 
 export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     const earthGroupRef = useRef<THREE.Group>(null);
@@ -20,15 +21,28 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         speedFactor: 2.0, // rotation speed of the earth
         metalness: 0.1,
     };
+    const texturePaths = useIsMobile()
+        ? [
+                '/textures/2k/earthmap.jpg',
+                '/textures/2k/earthspec.jpg',
+                '/textures/2k/earthbump.jpg',
+                '/textures/2k/earthlights.jpg',
+                '/textures/2k/oceanmap.jpg',
+                '/textures/2k/earthcloudmaptrans.jpg',
+            ]
+        : [
+                '/textures/earthmap.jpg',
+                '/textures/earthspec.jpg',
+                '/textures/earthbump.jpg',
+                '/textures/earthlights.jpg',
+                '/textures/oceanmap.jpg',
+                '/textures/earthcloudmaptrans.jpg',
+            ];
 
-    const [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture] = useLoader(THREE.TextureLoader, [
-        '/textures/8081_earthmap10k-min.jpg',
-        '/textures/8081_earthspec10k-min.jpg',
-        '/textures/8081_earthbump10k-min.jpg',
-        '/textures/8081_earthlights10k-min.jpg',
-        '/textures/8081_oceanmap-min.jpg',
-        '/textures/8081_earthcloudmaptrans-min.jpg',
-    ]);
+    const [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture] = useLoader(
+        THREE.TextureLoader,
+        texturePaths,
+    );
 
     function configureTexture(texture: THREE.Texture) {
         texture.offset.set(0.5, 0); // Offset for longitude alignment (center on 0°)

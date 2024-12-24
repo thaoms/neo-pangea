@@ -7,6 +7,7 @@ import { InputSection } from './components/InputSection';
 import { AudioControl } from './components/AudioControl';
 import { useErrorBoundary } from 'use-error-boundary';
 import { Question } from './components/SpeechBubble';
+import { useIsMobile } from './utils/useIsMobile';
 
 export function App() {
     const [response, setResponse] = useState('');
@@ -50,6 +51,8 @@ export function App() {
 
     const { ErrorBoundary, didCatch, error } = useErrorBoundary();
 
+    const isMobile = useIsMobile();
+
     // Memoize the canvas to prevent re-renders
     const canvasContent = useMemo(() => {
         return (
@@ -66,7 +69,7 @@ export function App() {
                     far: 1000,
                 }}
                 gl={{
-                    pixelRatio: Math.min(window.devicePixelRatio, 2),
+                    pixelRatio: Math.min(window.devicePixelRatio, !isMobile ? 1.5 : 2),
                     antialias: true,
                     alpha: false,
                     stencil: false,

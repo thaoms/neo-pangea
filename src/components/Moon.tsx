@@ -1,6 +1,7 @@
 import { useLoader, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
+import { useIsMobile } from '../utils/useIsMobile';
 
 interface MoonProps {
     earthRef: React.RefObject<THREE.Group>;
@@ -12,9 +13,17 @@ export function Moon({ earthRef, distance = 3, speed = 0.000266 }: MoonProps) {
     const moonGroupRef = useRef<THREE.Group>(null);
     const moonMeshRef = useRef<THREE.Mesh>(null);
 
+    const moonTexturePath = useIsMobile()
+        ? '/textures/2k/moonmap.jpg'
+        : '/textures/moonmap.jpg';
+
+    const moonBumpPath = useIsMobile()
+        ? '/textures/2k/moonbump.jpg'
+        : '/textures/moonbump.jpg';
+
     const [moonMap, moonBump] = useLoader(THREE.TextureLoader, [
-        '/textures/moonmap4k-min.jpg',
-        '/textures/moonbump4k-min.jpg',
+        moonTexturePath,
+        moonBumpPath,
     ]);
 
     function configureTexture(texture: THREE.Texture) {
