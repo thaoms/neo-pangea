@@ -79,7 +79,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         <group ref={earthGroupRef}>
             <group ref={localEarth}>
                 <mesh ref={earthRef}>
-                    <icosahedronGeometry args={[1, 20]} />
+                    <sphereGeometry args={[1, 20]} />
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
@@ -87,7 +87,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                         roughnessMap={!isMobile ? earthSpec : null}
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
-                        bumpMap={earthBump}
+                        bumpMap={!isMobile ? earthBump : null}
                         bumpScale={1}
                         onBeforeCompile={(shader) => {
                         // Add cloud uniform
@@ -150,7 +150,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 ref={cloudsRef}
                 scale={[1.003, 1.003, 1.003]}
             >
-                <icosahedronGeometry args={[1, 20]} />
+                <sphereGeometry args={[1, 20]} />
                 <meshStandardMaterial
                     map={cloudTexture}
                     transparent
