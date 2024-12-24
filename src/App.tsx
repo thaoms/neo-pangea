@@ -24,7 +24,7 @@ export function App() {
         const question = questionRaw.text + ' lat:' + questionRaw.lat + ' lon:' + questionRaw.lon;
 
         try {
-            const res = await fetch(`${apiUrl}/api/ask`, {
+            const res = await fetch(`https://${apiUrl}/api/ask`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
