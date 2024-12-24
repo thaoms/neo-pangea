@@ -1,4 +1,4 @@
-import { Suspense, useRef } from 'react';
+import { Suspense, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { SpeechBubbles3D } from './SpeechBubbles';
@@ -22,7 +22,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         speedFactor: 2.0, // rotation speed of the earth
     };
 
-    const texturePaths = isMobile
+    const texturePaths = useMemo(() => isMobile
         ? [
                 '/textures/2k/earthmap.jpg',
                 '/textures/2k/earthspec.jpg',
@@ -38,7 +38,8 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 '/textures/earthlights.jpg',
                 '/textures/oceanmap.jpg',
                 '/textures/earthcloudmaptrans.jpg',
-            ];
+            ], [isMobile],
+    );
 
     const [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture] = useLoader(
         THREE.TextureLoader,
@@ -83,12 +84,12 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
-                        metalnessMap={!isMobile ? earthSpec : null}
-                        roughnessMap={!isMobile ? earthSpec : null}
+                        metalnessMap={earthSpec}
+                        roughnessMap={earthSpec}
+                        bumpMap={earthBump}
+                        bumpScale={0.03}
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
-                        bumpMap={!isMobile ? earthBump : null}
-                        bumpScale={1}
                         onBeforeCompile={(shader) => {
                         // Add cloud uniform
                             shader.uniforms.tClouds = { value: cloudTexture };

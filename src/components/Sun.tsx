@@ -15,12 +15,11 @@ export function Sun({ distance = 30, speed = 0.0002, onRefReady }: SunProps) {
     const sunAngle = useRef(0);
 
     useEffect(() => {
-        if (sunSphereRef.current) {
+        if (sunSphereRef.current && onRefReady) {
             onRefReady(sunSphereRef.current);
         }
-    }, [onRefReady]);
+    }, [onRefReady, sunSphereRef.current]);
 
-    // Update Sunlight position dynamically
     useFrame(() => {
         if (sunLightRef.current && sunSphereRef.current) {
             sunAngle.current += speed;

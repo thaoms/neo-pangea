@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -8,7 +8,7 @@ interface CurrentLocationProps {
     markerRadius: number;
 }
 
-export function CurrentLocation({ markerRadius }: CurrentLocationProps) {
+const CurrentLocation = memo(({ markerRadius }: CurrentLocationProps) => {
     const flagRef = useRef<THREE.Mesh>(null);
     const gltf = useLoader(GLTFLoader, '/models/flag.gltf');
     const [position, setPosition] = useState<THREE.Vector3 | null>(null);
@@ -44,4 +44,6 @@ export function CurrentLocation({ markerRadius }: CurrentLocationProps) {
             scale={[0.02, 0.02, 0.02]}
         />
     );
-}
+});
+
+export { CurrentLocation };

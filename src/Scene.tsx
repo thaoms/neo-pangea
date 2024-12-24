@@ -15,15 +15,17 @@ export function Scene({ onClick }: { onClick: (question: Question) => void }) {
     const earthGroupRef = useRef<THREE.Group>(null);
 
     return (
-        <Suspense fallback={<Loader />}>
+        <>
             <Controls maxDistance={5} />
-            <Starfield numStars={2000} />
-            <group ref={earthGroupRef} rotation={[THREE.MathUtils.degToRad(-23.4), 0, 0]}>
-                <Earth onClick={onClick} />
-            </group>
-            <Moon earthRef={earthGroupRef} />
-            <SkyBox />
-            <Effects />
-        </Suspense>
+            <Suspense fallback={<Loader />}>
+                <Starfield numStars={2000} />
+                <group ref={earthGroupRef} rotation={[THREE.MathUtils.degToRad(-23.4), 0, 0]}>
+                    <Earth onClick={onClick} />
+                </group>
+                <Moon earthRef={earthGroupRef} />
+                <SkyBox />
+                <Effects />
+            </Suspense>
+        </>
     );
 }

@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react';
+import { memo, RefObject, useEffect, useState } from 'react';
 import { Question, SpeechBubble3D } from './SpeechBubble';
 import * as THREE from 'three';
 
@@ -8,7 +8,7 @@ interface SpeechBubbles3DProps {
     earthGroupRef: RefObject<THREE.Group>;
 }
 
-export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: SpeechBubbles3DProps) {
+const SpeechBubbles3D = memo(({ markerRadius, onClick, earthGroupRef }: SpeechBubbles3DProps) => {
     const [questions, setQuestions] = useState([]);
 
     const getQuestions = async () => {
@@ -51,4 +51,6 @@ export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: Speech
             ))}
         </>
     );
-}
+});
+
+export { SpeechBubbles3D };

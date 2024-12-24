@@ -1,16 +1,15 @@
 import { DepthOfField, Bloom, ToneMapping, Vignette, EffectComposer, GodRays } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
-import { Suspense, useState } from 'react';
+import {useState } from 'react';
 import { Mesh } from 'three';
 import { Sun } from './Sun';
-import { Loader } from './Loader';
 import * as THREE from 'three';
 
 export function Effects() {
     const [material, set] = useState<Mesh | null>();
 
     return (
-        <Suspense fallback={<Loader />}>
+        <>
             <fog attach="fog" args={['#d7dfff', 50, 250]} />
             <Sun
                 onRefReady={ref => set(ref)}
@@ -51,6 +50,6 @@ export function Effects() {
                     <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 </EffectComposer>
             )}
-        </Suspense>
+        </>
     );
 }
