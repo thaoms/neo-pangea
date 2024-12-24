@@ -79,7 +79,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         <group ref={earthGroupRef}>
             <group ref={localEarth}>
                 <mesh ref={earthRef}>
-                    <sphereGeometry args={[1, 20]} />
+                    <icosahedronGeometry args={[1, 20]} />
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
@@ -150,7 +150,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 ref={cloudsRef}
                 scale={[1.003, 1.003, 1.003]}
             >
-                <sphereGeometry args={[1, 20]} />
+                <icosahedronGeometry args={[1, 20]} />
                 <meshStandardMaterial
                     map={cloudTexture}
                     transparent
