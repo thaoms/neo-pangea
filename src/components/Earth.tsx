@@ -21,7 +21,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     const params = {
         speedFactor: 2.0, // rotation speed of the earth
     };
-    
+
     const texturePaths = isMobile
         ? [
                 '/textures/2k/earthmap.jpg',
@@ -83,8 +83,8 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
-                        metalnessMap={isMobile ? earthSpec : null}
-                        roughnessMap={isMobile ? earthSpec : null}
+                        metalnessMap={earthSpec}
+                        roughnessMap={earthSpec}
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
                         bumpMap={earthBump}

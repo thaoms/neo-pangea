@@ -36,7 +36,7 @@ export function ResponseField({
             </div>
             <div
                 id="response-field"
-                className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl shadow-xl min-w-60 w-11/12 md:w-3/4 transition-transform transition-opacity duration-500 ease-in-out z-50 space-y-4 ${
+                className={`max-h-[400px] overflow-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl shadow-xl min-w-60 w-11/12 md:w-2/4 transition-transform transition-opacity duration-500 ease-in-out z-50 space-y-4 ${
                     response || loading ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'
                 }`}
                 style={{

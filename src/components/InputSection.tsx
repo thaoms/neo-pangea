@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Question } from './SpeechBubble';
 
 export function InputSection({ onSubmit }: { onSubmit: (question: Question) => void }) {
@@ -9,8 +9,13 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
         if (question.trim()) {
             onSubmit({ text: question.trim() });
             setQuestion('');
-            setExpanded(false); // Close the input field after submission
+            setExpanded(false);
         }
+    };
+
+    const handleClose = () => {
+        setExpanded(false);
+        setQuestion('');
     };
 
     return (
@@ -24,10 +29,20 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
             {!expanded
                 ? (
                         <div className="text-white text-2xl font-bold cursor-pointer">&#x2754;</div>
-
                     )
                 : (
-                        <div className="w-full space-y-4">
+                        <div className="w-full space-y-4 relative">
+                            <button
+                                onClick={handleClose}
+                                style={{
+                                    background:
+                                        'linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3))',
+                                }}
+                                className="absolute -top-4 -right-4 text-white p-1 rounded-full w-6 h-6 flex items-center justify-center shadow-lg transition-all duration-300"
+                                aria-label="Close"
+                            >
+                                &#x2715;
+                            </button>
                             <input
                                 id="question"
                                 type="text"
@@ -38,7 +53,6 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
                                 onKeyDown={e => e.key === 'Enter' && handleSubmit()}
                                 autoFocus
                             />
-
                             <button
                                 id="askButton"
                                 onClick={handleSubmit}
