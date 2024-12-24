@@ -6,7 +6,7 @@ interface AudioControlProps {
 
 export function AudioControl({ audioFile }: AudioControlProps) {
     const audioRef = useRef<HTMLAudioElement>(null);
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const toggleAudio = () => {
         if (audioRef.current) {
