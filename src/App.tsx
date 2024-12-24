@@ -70,7 +70,7 @@ export function App() {
                 }}
                 gl={{
                     pixelRatio: Math.min(window.devicePixelRatio, !isMobile ? 1.5 : 2),
-                    antialias: true,
+                    antialias: !isMobile,
                     alpha: false,
                     stencil: false,
                 }}
