@@ -15,7 +15,7 @@ export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: Speech
 
     const getQuestions = async () => {
         try {
-            const res = await fetch(`${apiUrl}/api/get/questions`, {
+            const res = await fetch(`${apiUrl}/api/questions`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

@@ -6,7 +6,6 @@ import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 
 const app = express();
-const port = process.env.PORT || 3000;
 const clientUrl = process.env.CLIENT_URL || 'http://localhost:3001';
 
 const limiter = rateLimit({
@@ -20,76 +19,6 @@ app.use(helmet());
 app.use(limiter);
 
 const openai = new OpenAI();
-
-const systemPrompt = `
-You are an empathetic philosopher and guide, dedicated to answering profound and meaningful questions about life, identity, society, and existence. Your role is to thoughtfully address topics such as:
-
-- The meaning of life and our goals.
-- Questions about identity and self-discovery.
-- Philosophical inquiries about the existence of borders or their role in human society.
-- Deep existential and societal reflections.
-- Ethical and moral dilemmas.
-- Encouraging critical thinking and meaningful exploration.
-
-Guidelines:
-
-- Always maintain an accessible, empathetic, and understanding tone.
-- Refuse to answer questions outside your expertise, such as technical, harmful, or irrelevant topics.
-- If a question is unclear, ask for clarification to provide a meaningful response.
-- Respond in a way that inspires reflection, personal growth, and understanding.
-- Keep it concise and speak as an average person would to ensure everyone can understand.
-- Always end with a question to encourage further thought.
-- If latitude-longitude coordinates are present, answer the question in the context of the region (e.g., with an anecdote, historical information, or fun facts), if not, don't mention it.
-- Always prioritize thoughtful and accessible communication so that users feel heard and guided without judgment or bias.
-- Limit yourself to two paragraphs
-`;
-
-app.post('/api/ask', async (req, res) => {
-    const { question } = req.body;
-
-    if (!question) {
-        return res.status(400).json({ error: 'Question is required.' });
-    }
-
-    if (typeof question !== 'string' || question.length > 500) {
-        return res.status(400).json({ error: 'Invalid input.' });
-    }
-
-    try {
-        const response = await openai.chat.completions.create({
-            model: 'gpt-4o',
-            messages: [
-                {
-                    role: 'developer',
-                    content: [
-                        {
-                            type: 'text',
-                            text: systemPrompt,
-                        },
-                    ],
-                },
-                {
-                    role: 'user',
-                    content: question,
-                },
-            ],
-        });
-
-        let reply = '';
-        if (response.choices && response.choices[0] && response.choices[0].message && response.choices[0].message.content) {
-            reply = response.choices[0].message.content.trim();
-        }
-        else {
-            reply = 'No responses';
-        }
-
-        res.json({ reply });
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to get a response from OpenAI.' });
-    }
-});
 
 const questionsPrompt = `
 Generate a JavaScript array of objects with philosophical questions linked to specific geographical locations. The structure should look like this: { text: 'question', lat: latitude, lon: longitude }.
@@ -130,7 +59,7 @@ const questions = [
 Generate a new, original array with a maximum of 15 questions that meet the above criteria. Do not copy the examples literally and make the questions unique and relevant to the location. Important: Ensure there is a minimum distance of 2000 km between any two locations to avoid clustering.
 `;
 
-app.get('/api/get/questions', async (_req, res) => {
+app.get('/api/questions', async (_req, res) => {
     try {
         const response = await openai.chat.completions.create({
             model: 'gpt-4o',
@@ -191,10 +120,6 @@ app.get('/api/get/questions', async (_req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Failed to get a response from OpenAI.' });
     }
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
 });
 
 // Export app for serverless
