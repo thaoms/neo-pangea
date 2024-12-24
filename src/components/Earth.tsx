@@ -83,8 +83,8 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
-                        metalnessMap={earthSpec}
-                        roughnessMap={earthSpec}
+                        metalnessMap={!isMobile ? earthSpec : null}
+                        roughnessMap={!isMobile ? earthSpec : null}
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
                         bumpMap={earthBump}
