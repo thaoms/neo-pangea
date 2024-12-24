@@ -14,14 +14,15 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     const earthMat = useRef<THREE.MeshStandardMaterial>(null);
     const cloudsRef = useRef<THREE.Mesh>(null);
     const localEarth = useRef<THREE.Group>(null);
+    const isMobile = useIsMobile();
 
     const markerRadius = 1;
 
     const params = {
         speedFactor: 2.0, // rotation speed of the earth
-        metalness: 0.1,
     };
-    const texturePaths = useIsMobile()
+    
+    const texturePaths = isMobile
         ? [
                 '/textures/2k/earthmap.jpg',
                 '/textures/2k/earthspec.jpg',
@@ -82,9 +83,8 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
-                        metalnessMap={earthSpec}
-                        metalness={params.metalness}
-                        roughnessMap={earthSpec}
+                        metalnessMap={isMobile ? earthSpec : null}
+                        roughnessMap={isMobile ? earthSpec : null}
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
                         bumpMap={earthBump}
