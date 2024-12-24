@@ -16,7 +16,6 @@ build/
 out/
 .next/
 .vite
-api/
 
 # System files
 .DS_Store

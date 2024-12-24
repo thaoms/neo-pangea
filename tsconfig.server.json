@@ -7,7 +7,7 @@
         "moduleResolution": "Node",   // Resolve modules like Node.js
         "allowJs": false,             // Disallow JavaScript files
         "resolveJsonModule": true,    // Allow importing JSON files
-        "noEmit": false,               // Ensure the server code is emitted
+        "noEmit": true,
         "allowSyntheticDefaultImports": true,
     },
     "include": ["./src/api/*.ts"],    // Include only the server entry point

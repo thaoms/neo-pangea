@@ -3,13 +3,11 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start-server": "node --experimental-strip-types --experimental-transform-types --env-file=.env.local src/api/index.ts",
-        "build-server": "tsc -p tsconfig.server.json",
-        "start-production": "node ./api/index.js",
+        "start-server": "node --experimental-strip-types --experimental-transform-types --env-file=.env.local ./api/index.ts",
         "start-client": "vite",
         "build-client": "vite build",
         "preview-client": "vite preview",
-        "build": "npm run build-client && npm run build-server",
+        "build": "npm run build-client",
         "lint": "eslint ./src --report-unused-disable-directives --max-warnings 0",
         "type-check": "tsc"
     },
