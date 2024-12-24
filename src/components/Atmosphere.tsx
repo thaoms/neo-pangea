@@ -13,9 +13,7 @@ export function Atmosphere({ markerRadius }: AtmosphereProps) {
 
     return (
         <mesh ref={glowMeshRef} material={fresnelMat} scale={[1.01, 1.01, 1.01]}>
-            <icosahedronGeometry
-                args={[markerRadius, 20]}
-            />
+            <sphereGeometry args={[markerRadius, 52, 52]} />
         </mesh>
     );
 }

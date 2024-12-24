@@ -60,7 +60,7 @@ export function Moon({ earthRef, distance = 3, speed = 0.000266 }: MoonProps) {
     return (
         <group ref={moonGroupRef}>
             <mesh ref={moonMeshRef} rotation={[rotationTilt, 0, 0]} receiveShadow>
-                <icosahedronGeometry args={[0.17, 12]} />
+                <sphereGeometry args={[0.17, 42, 42]} />
                 <meshPhongMaterial
                     map={moonMap}
                     bumpMap={moonBump}
