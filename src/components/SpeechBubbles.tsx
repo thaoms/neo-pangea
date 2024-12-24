@@ -11,11 +11,9 @@ interface SpeechBubbles3DProps {
 export function SpeechBubbles3D({ markerRadius, onClick, earthGroupRef }: SpeechBubbles3DProps) {
     const [questions, setQuestions] = useState([]);
 
-    const apiUrl = import.meta.env.VITE_VERCEL_URL;
-
     const getQuestions = async () => {
         try {
-            const res = await fetch(`https://${apiUrl}/api/questions`, {
+            const res = await fetch(`/api/questions`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
