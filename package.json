@@ -3,8 +3,6 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start-server": "node --experimental-strip-types --experimental-transform-types --env-file=.env.local ./api/index.ts",
-        "start-client": "vite",
         "build-client": "vite build",
         "preview-client": "vite preview",
         "build": "npm run build-client",
@@ -45,7 +43,6 @@
         "body-parser": "^1.20.3",
         "cors": "^2.8.5",
         "express": "^4.21.2",
-        "express-rate-limit": "^7.5.0",
         "helmet": "^8.0.0",
         "openai": "^4.77.0",
         "postprocessing": "^6.36.4",

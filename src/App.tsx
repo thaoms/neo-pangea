@@ -14,7 +14,7 @@ export function App() {
     const cameraRef = useRef<THREE.Camera | null>(null);
     const questionRef = useRef('');
 
-    const apiUrl = import.meta.env.VITE_API_URL;
+    const apiUrl = import.meta.env.VITE_VERCEL_URL;
 
     const handleQuestionSubmission = async (questionRaw: Question) => {
         setLoading(true);

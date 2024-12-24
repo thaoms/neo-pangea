@@ -3,20 +3,13 @@ import bodyParser from 'body-parser';
 import { OpenAI } from 'openai';
 import cors from 'cors'; // Import CORS
 import helmet from 'helmet';
-import { rateLimit } from 'express-rate-limit';
 
 const app = express();
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:3001';
-
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-});
+const clientUrl = process.env.VERCEL_URL || 'http://localhost:3001';
 
 app.use(cors({ origin: clientUrl }));
 app.use(bodyParser.json());
 app.use(helmet());
-app.use(limiter);
 
 const openai = new OpenAI();
 
