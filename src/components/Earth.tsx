@@ -86,8 +86,6 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                         map={earthMap}
                         metalnessMap={earthSpec}
                         roughnessMap={earthSpec}
-                        bumpMap={earthBump}
-                        bumpScale={0.03}
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
                         onBeforeCompile={(shader) => {
