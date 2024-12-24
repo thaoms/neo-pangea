@@ -26,7 +26,6 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         ? [
                 '/textures/2k/earthmap.jpg',
                 '/textures/2k/earthspec.jpg',
-                '/textures/2k/earthbump.jpg',
                 '/textures/2k/earthlights.jpg',
                 '/textures/2k/oceanmap.jpg',
                 '/textures/2k/earthcloudmaptrans.jpg',
@@ -34,27 +33,26 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         : [
                 '/textures/earthmap.jpg',
                 '/textures/earthspec.jpg',
-                '/textures/earthbump.jpg',
                 '/textures/earthlights.jpg',
                 '/textures/oceanmap.jpg',
                 '/textures/earthcloudmaptrans.jpg',
             ], [isMobile],
     );
 
-    const [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture] = useLoader(
+    const [earthMap, earthSpec, earthLights, oceanMap, cloudTexture] = useLoader(
         THREE.TextureLoader,
         texturePaths,
     );
 
     function configureTexture(texture: THREE.Texture) {
-        texture.offset.set(0.5, 0); // Offset for longitude alignment (center on 0°)
+        texture.offset.set(0, 0); // Offset for longitude alignment (center on 0°)
         texture.wrapS = THREE.RepeatWrapping; // Seamless horizontal wrapping
         texture.wrapT = THREE.ClampToEdgeWrapping; // Prevent vertical wrapping
 
         return texture;
     }
 
-    [earthMap, earthSpec, earthBump, earthLights, oceanMap, cloudTexture].forEach(configureTexture);
+    [earthMap, earthSpec, earthLights, oceanMap, cloudTexture].forEach(configureTexture);
 
     useFrame((_, delta) => {
         // Rotate Earth and Clouds
