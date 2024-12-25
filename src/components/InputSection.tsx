@@ -28,7 +28,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
         >
             {!expanded
                 ? (
-                        <div className="text-white text-2xl font-bold cursor-pointer">&#x2754;</div>
+                        <div className="text-white text-2xl font-bold cursor-pointer">🙋</div>
                     )
                 : (
                         <div className="w-full space-y-4 relative">
