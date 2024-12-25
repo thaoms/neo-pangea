@@ -6,5 +6,5 @@ interface ControlsProps {
 }
 
 export function Controls({ minDistance = 1.5, maxDistance = 9999 }: ControlsProps) {
-    return <DreiOrbitControls minDistance={minDistance} maxDistance={maxDistance} />;
+    return <DreiOrbitControls minDistance={minDistance} maxDistance={maxDistance} enablePan={false} />;
 }

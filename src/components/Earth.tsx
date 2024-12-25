@@ -47,7 +47,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     );
 
     function configureTexture(texture: THREE.Texture) {
-        texture.offset.set(0, 0); // Offset for longitude alignment (center on 0°)
+        texture.offset.set(0.5, 0); // Offset for longitude alignment (center on 0°)
         texture.wrapS = THREE.RepeatWrapping; // Seamless horizontal wrapping
         texture.wrapT = THREE.ClampToEdgeWrapping; // Prevent vertical wrapping
 
@@ -80,14 +80,14 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         <group ref={earthGroupRef}>
             <group ref={localEarth}>
                 <mesh ref={earthRef}>
-                    <sphereGeometry args={[1, 52, 52]} />
+                    <icosahedronGeometry args={[1, 20]} />
                     <meshStandardMaterial
                         ref={earthMat}
                         map={earthMap}
                         metalnessMap={earthSpec}
                         roughnessMap={earthSpec}
                         normalMap={normalmap}
-                        normalScale={new THREE.Vector2( 0.2, 0.2 )}
+                        normalScale={new THREE.Vector2(0.01, 0.01)}
                         onBeforeCompile={(shader) => {
                         // Add cloud uniform
                             shader.uniforms.tClouds = { value: cloudTexture };
@@ -149,7 +149,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 ref={cloudsRef}
                 scale={[1.003, 1.003, 1.003]}
             >
-                <sphereGeometry args={[1, 52, 52]} />
+                <icosahedronGeometry args={[1, 20]} />
                 <meshStandardMaterial
                     map={cloudTexture}
                     transparent
