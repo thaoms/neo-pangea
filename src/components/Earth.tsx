@@ -29,6 +29,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 '/textures/2k/earthlights.jpg',
                 '/textures/2k/oceanmap.jpg',
                 '/textures/2k/earthcloudmaptrans.jpg',
+                '/textures/2k/normalmap.jpg',
             ]
         : [
                 '/textures/earthmap.jpg',
@@ -36,10 +37,11 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 '/textures/earthlights.jpg',
                 '/textures/oceanmap.jpg',
                 '/textures/earthcloudmaptrans.jpg',
+                '/textures/2k/normalmap.jpg',
             ], [isMobile],
     );
 
-    const [earthMap, earthSpec, earthLights, oceanMap, cloudTexture] = useLoader(
+    const [earthMap, earthSpec, earthLights, oceanMap, cloudTexture, normalmap] = useLoader(
         THREE.TextureLoader,
         texturePaths,
     );
@@ -52,7 +54,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         return texture;
     }
 
-    [earthMap, earthSpec, earthLights, oceanMap, cloudTexture].forEach(configureTexture);
+    [earthMap, earthSpec, earthLights, oceanMap, cloudTexture, normalmap].forEach(configureTexture);
 
     useFrame((_, delta) => {
         // Rotate Earth and Clouds
@@ -84,12 +86,12 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                         map={earthMap}
                         metalnessMap={earthSpec}
                         roughnessMap={earthSpec}
-                        emissiveMap={earthLights}
-                        emissive={new THREE.Color(0xffff88)}
+                        normalMap={normalmap}
+                        normalScale={new THREE.Vector2( 0.2, 0.2 )}
                         onBeforeCompile={(shader) => {
                         // Add cloud uniform
                             shader.uniforms.tClouds = { value: cloudTexture };
-                            shader.uniforms.uv_xOffset = { value: 0.005 };
+                            shader.uniforms.uv_xOffset = { value: 0.002 };
 
                             // Inject cloud-related uniforms and logic
                             shader.fragmentShader = shader.fragmentShader.replace(
