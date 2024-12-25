@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function ResponseField({
     question,
@@ -11,6 +11,8 @@ export function ResponseField({
     loading: boolean;
     onClose: () => void;
 }) {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
@@ -18,10 +20,24 @@ export function ResponseField({
             }
         };
 
+        const handleMouseMove = (event: MouseEvent) => {
+            if (!containerRef.current) return;
+
+            const { clientX, clientY } = event;
+            const { innerWidth, innerHeight } = window;
+
+            const xOffset = ((clientX / innerWidth) - 0.5) * 20;
+            const yOffset = ((clientY / innerHeight) - 0.5) * 20;
+
+            containerRef.current.style.transform = `translate(-50%, -50%) perspective(1000px) rotateX(${-yOffset}deg) rotateY(${xOffset}deg)`;
+        };
+
         document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('mousemove', handleMouseMove);
         };
     }, [onClose]);
 
@@ -35,8 +51,9 @@ export function ResponseField({
             >
             </div>
             <div
+                ref={containerRef}
                 id="response-field"
-                className={`max-h-[400px] overflow-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl shadow-xl min-w-60 w-11/12 md:w-2/4 transition-transform transition-opacity duration-500 ease-in-out z-50 space-y-4 ${
+                className={`max-h-[400px] overflow-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-3xl shadow-xl min-w-60 w-11/12 md:w-2/4 transition-transform transition-opacity z-50 space-y-4 ${
                     response || loading ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'
                 }`}
                 style={{
@@ -44,6 +61,7 @@ export function ResponseField({
                         'linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3))',
                     backdropFilter: 'blur(15px)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
+                    perspective: '1000px',
                 }}
             >
                 <button
