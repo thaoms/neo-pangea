@@ -10,6 +10,7 @@ import { useIsMobile } from './utils/useIsMobile';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './components/ErrorFallback';
 import { About } from './components/About';
+import { SpotifyPlayerDrawer } from './components/SpotifyPlayerDrawer';
 
 export function App() {
     const [response, setResponse] = useState('');
@@ -125,6 +126,7 @@ export function App() {
                 />
                 <About />
                 <AudioControl audioFile="./audio/ambient-space-noise-55472.mp3" />
+                <SpotifyPlayerDrawer />
             </ErrorBoundary>
         </StrictMode>
     );

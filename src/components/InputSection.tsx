@@ -23,7 +23,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
             id="input-container"
             className={`fixed bottom-5 left-1/2 transform -translate-x-1/2 ${
                 expanded ? 'w-96 p-6 rounded-3xl' : 'w-16 h-16 rounded-full cursor-pointer hover:bg-gradient-to-l'
-            } shadow-xl bg-gradient-to-r from-blue-900/30 via-purple-800/30 to-pink-700/30 backdrop-blur-lg z-50 transition-all duration-150 ease-in flex items-center justify-center`}
+            } shadow-xl bg-gradient-to-r from-blue-900/30 via-purple-800/30 to-pink-700/30 backdrop-blur-lg z-50 transition-all duration-150 ease-in flex items-center justify-center select-none`}
             onClick={() => !expanded && setExpanded(true)}
         >
             {!expanded

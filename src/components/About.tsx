@@ -23,13 +23,15 @@ export function About() {
 
     return (
         <>
-            <div
+            <button
+                title="About the project"
+                type="button"
                 id="popup-button"
-                className="fixed bottom-20 left-5 w-12 h-12 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:bg-gradient-to-l transition bg-gradient-to-r from-blue-900/50 via-purple-800/40 to-pink-700/30"
+                className="fixed bottom-[8.8rem] right-5 w-12 h-12 text-white rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:bg-gradient-to-l transition bg-gradient-to-r from-blue-900/50 via-purple-800/40 to-pink-700/30 select-none"
                 onClick={togglePopup}
             >
                 <div className="text-white text-2xl font-bold">📖</div>
-            </div>
+            </button>
 
             {popupVisible && (
                 <>
@@ -83,6 +85,7 @@ export function About() {
                             <li>TypeScript</li>
                             <li>Three.js (@react-three/fiber, @react-three/drei)</li>
                             <li>Tailwind CSS</li>
+                            <li>Howler.js</li>
                             <li>Vite</li>
                             <li>Express.js (API)</li>
                             <li>Helmet (Security)</li>

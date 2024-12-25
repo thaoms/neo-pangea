@@ -25,6 +25,9 @@
 - [TailwindCSS](https://tailwindcss.com/)  
   Licensed under the [MIT License](https://github.com/tailwindlabs/tailwindcss/blob/master/LICENSE).
 
+- [Howler.js](https://howlerjs.com/)  
+Licensed under the [MIT License](https://github.com/goldfire/howler.js/blob/master/LICENSE).
+
 ---
 
 ## APIs
