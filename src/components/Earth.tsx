@@ -88,6 +88,8 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                         roughnessMap={earthSpec}
                         normalMap={normalmap}
                         normalScale={new THREE.Vector2(0.01, 0.01)}
+                        emissiveMap={earthLights}
+                        emissive={new THREE.Color(0xffff88)}
                         onBeforeCompile={(shader) => {
                         // Add cloud uniform
                             shader.uniforms.tClouds = { value: cloudTexture };
