@@ -27,7 +27,6 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 '/textures/2k/earthmap.jpg',
                 '/textures/2k/earthspec.jpg',
                 '/textures/2k/earthlights.jpg',
-                '/textures/2k/oceanmap.jpg',
                 '/textures/2k/earthcloudmaptrans.jpg',
                 '/textures/2k/normalmap.jpg',
             ]
@@ -35,13 +34,12 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                 '/textures/earthmap.jpg',
                 '/textures/earthspec.jpg',
                 '/textures/earthlights.jpg',
-                '/textures/oceanmap.jpg',
                 '/textures/earthcloudmaptrans.jpg',
                 '/textures/2k/normalmap.jpg',
             ], [isMobile],
     );
 
-    const [earthMap, earthSpec, earthLights, oceanMap, cloudTexture, normalmap] = useLoader(
+    const [earthMap, earthSpec, earthLights, cloudTexture, normalmap] = useLoader(
         THREE.TextureLoader,
         texturePaths,
     );
@@ -54,7 +52,7 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         return texture;
     }
 
-    [earthMap, earthSpec, earthLights, oceanMap, cloudTexture, normalmap].forEach(configureTexture);
+    [earthMap, earthSpec, earthLights, cloudTexture, normalmap].forEach(configureTexture);
 
     useFrame((_, delta) => {
         // Rotate Earth and Clouds
