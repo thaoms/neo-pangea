@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 function isMobileDevice(): boolean {
     // 1. User-Agent detection
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
     const isMobileUA = /android|ipad|iphone|ipod|windows phone|iemobile|wpdesktop|kindle|silk|mobile|crios/i.test(userAgent);
 

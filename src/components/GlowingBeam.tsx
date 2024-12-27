@@ -69,7 +69,11 @@ export function GlowingBeam({
 
     useFrame(({ clock }) => {
         if (beamRef.current) {
-            beamRef.current.material.uniforms.time.value = clock.getElapsedTime();
+            const material = beamRef.current.material as THREE.ShaderMaterial;
+
+            if (material.uniforms) {
+                material.uniforms.time.value = clock.getElapsedTime();
+            }
         }
         if (lightRef.current) {
             lightRef.current.intensity = intensity + Math.sin(clock.getElapsedTime() * 4) * 0.5; // Pulsate light

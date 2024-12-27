@@ -5,7 +5,7 @@ import { Scene } from './Scene';
 import { ResponseField } from './components/ResponseField';
 import { InputSection } from './components/InputSection';
 import { AudioControl } from './components/AudioControl';
-import { Question } from './components/SpeechBubble';
+import { Question, QuestionWithLocation } from './components/SpeechBubble';
 import { useIsMobile } from './utils/useIsMobile';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './components/ErrorFallback';
@@ -19,12 +19,14 @@ export function App() {
     const cameraRef = useRef<THREE.Camera | null>(null);
     const isMobile = useIsMobile();
 
-    const handleQuestionSubmission = useCallback(async (questionRaw: Question) => {
+    const handleQuestionSubmission = useCallback(async (questionRaw: QuestionWithLocation | Question) => {
         setLoading(true);
         setResponse('');
         setCurrentQuestion('');
 
-        const question = `${questionRaw.text} lat:${questionRaw.lat} lon:${questionRaw.lon}`;
+        const question = `${questionRaw.text}`
+            + ('lat' in questionRaw && questionRaw.lat ? ` lat:${questionRaw.lat}` : '')
+            + ('lon' in questionRaw && questionRaw.lon ? ` lon:${questionRaw.lon}` : '');
 
         try {
             const res = await fetch(`/api/ask`, {

@@ -8,10 +8,10 @@ import { Starfield } from './components/Starfield';
 import { Loader } from './components/Loader';
 import './css/styles.css';
 import { Moon } from './components/Moon';
-import { Question } from './components/SpeechBubble';
+import { QuestionWithLocation } from './components/SpeechBubble';
 import { Effects } from './components/Effects';
 
-export function Scene({ onClick }: { onClick: (question: Question) => void }) {
+export function Scene({ onClick }: { onClick: (question: QuestionWithLocation) => void }) {
     const earthGroupRef = useRef<THREE.Group>(null);
 
     return (

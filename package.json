@@ -4,7 +4,7 @@
     "description": "",
     "scripts": {
         "preview": "vite preview",
-        "build": "vite build",
+        "build": "pnpm type-check && pnpm lint && vite build",
         "lint": "eslint ./src --report-unused-disable-directives --max-warnings 0",
         "type-check": "tsc"
     },

@@ -1,10 +1,10 @@
 import { memo, RefObject, useEffect, useState } from 'react';
-import { Question, SpeechBubble3D } from './SpeechBubble';
+import { QuestionWithLocation, SpeechBubble3D } from './SpeechBubble';
 import * as THREE from 'three';
 
 interface SpeechBubbles3DProps {
     markerRadius: number;
-    onClick: (question: Question) => void;
+    onClick: (question: QuestionWithLocation) => void;
     earthGroupRef: RefObject<THREE.Group>;
     isIdle: boolean;
 }

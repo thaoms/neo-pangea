@@ -5,17 +5,21 @@ import { GlowingBeam } from './GlowingBeam';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
+export type QuestionWithLocation = {
+    text: string;
+    lat: number;
+    lon: number;
+};
+
 export type Question = {
     text: string;
-    lat?: number;
-    lon?: number;
 };
 
 interface SpeechBubble3DProps {
-    question: Question;
+    question: QuestionWithLocation;
     markerRadius: number;
     earthGroupRef: React.RefObject<THREE.Group>; // Reference to the Earth group
-    onClick: (question: Question) => void;
+    onClick: (question: QuestionWithLocation) => void;
     isIdle: boolean;
 }
 

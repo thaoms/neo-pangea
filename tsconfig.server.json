@@ -8,7 +8,6 @@
         "allowJs": false,             // Disallow JavaScript files
         "resolveJsonModule": true,    // Allow importing JSON files
         "noEmit": true,
-        "allowSyntheticDefaultImports": true,
     },
     "include": ["./src/api/*.ts"],    // Include only the server entry point
     "exclude": ["./src/client", "./src/components", "./node_modules"]

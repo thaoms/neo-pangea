@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export function latLonToVector3(lat, lon, radius) {
+export function latLonToVector3(lat: number, lon: number, radius: number) {
     const phi = (90 - lat) * (Math.PI / 180); // Latitude to polar angle
     const theta = (lon + 180) * (Math.PI / 180); // Longitude to azimuthal angle
 

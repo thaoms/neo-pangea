@@ -1,9 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Question } from './SpeechBubble';
 
 export function InputSection({ onSubmit }: { onSubmit: (question: Question) => void }) {
     const [expanded, setExpanded] = useState(false);
     const [question, setQuestion] = useState('');
+
+    const openSound = useRef<Howl | null>(null);
+    const closeSound = useRef<Howl | null>(null);
+
+    useEffect(() => {
+        openSound.current = new Howl({
+            src: ['./audio/ui-pop-up.mp3'],
+            volume: 0.2,
+        });
+
+        closeSound.current = new Howl({
+            src: ['./audio/ui-exit.mp3'],
+            volume: 0.2,
+        });
+
+        return () => {
+            openSound.current?.unload();
+            closeSound.current?.unload();
+        };
+    }, []);
 
     const handleSubmit = () => {
         if (question.trim()) {
@@ -13,9 +33,16 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
         }
     };
 
-    const handleClose = () => {
-        setExpanded(false);
-        setQuestion('');
+    const toggleSection = (show: boolean) => {
+        if (show) {
+            openSound.current?.play();
+            setQuestion('');
+        }
+        else {
+            closeSound.current?.play();
+        }
+
+        setExpanded(show);
     };
 
     return (
@@ -24,7 +51,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
             className={`fixed bottom-5 left-1/2 transform -translate-x-1/2 ${
                 expanded ? 'w-96 p-6 rounded-3xl' : 'w-16 h-16 rounded-full cursor-pointer hover:bg-gradient-to-l'
             } shadow-xl bg-gradient-to-r from-blue-900/30 via-purple-800/30 to-pink-700/30 backdrop-blur-lg z-50 transition-all duration-150 ease-in flex items-center justify-center select-none`}
-            onClick={() => !expanded && setExpanded(true)}
+            onClick={() => !expanded && toggleSection(true)}
         >
             {!expanded
                 ? (
@@ -33,7 +60,7 @@ export function InputSection({ onSubmit }: { onSubmit: (question: Question) => v
                 : (
                         <div className="w-full space-y-4 relative">
                             <button
-                                onClick={handleClose}
+                                onClick={() => { toggleSection(false); }}
                                 style={{
                                     background:
                                         'linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3))',

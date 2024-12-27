@@ -3,12 +3,12 @@ import * as THREE from 'three';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { SpeechBubbles3D } from './SpeechBubbles';
 import { CurrentLocation } from './CurrentLocation';
-import { Question } from './SpeechBubble';
+import { QuestionWithLocation } from './SpeechBubble';
 import { Atmosphere } from './Atmosphere';
 import { Loader } from './Loader';
 import { useIsMobile } from '../utils/useIsMobile';
 
-export function Earth({ onClick }: { onClick: (question: Question) => void }) {
+export function Earth({ onClick }: { onClick: (question: QuestionWithLocation) => void }) {
     const earthGroupRef = useRef<THREE.Group>(null);
     const earthRef = useRef<THREE.Mesh>(null);
     const earthMat = useRef<THREE.MeshStandardMaterial>(null);
@@ -124,6 +124,8 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
                         onBeforeCompile={(shader) => {
+                            if (!earthMat.current) return;
+
                             shader.uniforms.tClouds = { value: cloudTexture };
                             shader.uniforms.uv_xOffset = { value: 0.002 };
 
