@@ -29,12 +29,12 @@ export function ResponseField({
 
         openSound.current = new Howl({
             src: ['./audio/ui-pop-up.mp3'],
-            volume: 0.5,
+            volume: 0.2,
         });
 
         closeSound.current = new Howl({
             src: ['./audio/ui-exit.mp3'],
-            volume: 0.5,
+            volume: 0.2,
         });
 
         return () => {
@@ -44,7 +44,6 @@ export function ResponseField({
         };
     }, []);
 
-    // Play open sound only once when modal becomes visible
     useEffect(() => {
         if ((response || loading) && !hasPlayedOpenSound) {
             openSound.current?.play();
