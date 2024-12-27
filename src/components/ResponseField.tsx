@@ -14,7 +14,9 @@ export function ResponseField({
     onClose: () => void;
 }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const responseTextRef = useRef<HTMLPreElement | null>(null); // Reference for the response text
     const [hasPlayedOpenSound, setHasPlayedOpenSound] = useState(false);
+    const [isAutoScrolling, setIsAutoScrolling] = useState(true); // Track auto-scroll state
 
     const typingSound = useRef<Howl | null>(null);
     const openSound = useRef<Howl | null>(null);
@@ -100,6 +102,44 @@ export function ResponseField({
         };
     }, [handleClose]);
 
+    // Observe changes in response text and auto-scroll, but respect manual scrolling
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!containerRef.current) return;
+
+            const isScrolledToBottom
+                = containerRef.current.scrollHeight - containerRef.current.scrollTop
+                <= containerRef.current.clientHeight + 10;
+
+            setIsAutoScrolling(isScrolledToBottom);
+        };
+
+        const observer = new MutationObserver(() => {
+            if (isAutoScrolling && containerRef.current) {
+                containerRef.current.scrollTop = containerRef.current.scrollHeight;
+            }
+        });
+
+        if (responseTextRef.current) {
+            observer.observe(responseTextRef.current, {
+                childList: true,
+                subtree: true,
+                characterData: true,
+            });
+        }
+
+        if (containerRef.current) {
+            containerRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            observer.disconnect();
+            if (containerRef.current) {
+                containerRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [isAutoScrolling]);
+
     return (
         <>
             <div
@@ -147,6 +187,7 @@ export function ResponseField({
                     {question}
                 </h1>
                 <pre
+                    ref={responseTextRef}
                     id="response-text"
                     className={`text-white text-opacity-90 font-medium text-sm leading-6 transition-opacity duration-500 pr-5 text-wrap ${
                         !loading && response ? 'opacity-100' : 'opacity-0'

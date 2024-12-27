@@ -1,6 +1,6 @@
 import { DepthOfField, Bloom, ToneMapping, Vignette, EffectComposer, GodRays } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
-import {useState } from 'react';
+import { useState } from 'react';
 import { Mesh } from 'three';
 import { Sun } from './Sun';
 import * as THREE from 'three';

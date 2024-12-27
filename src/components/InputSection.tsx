@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Question } from './SpeechBubble';
 
 export function InputSection({ onSubmit }: { onSubmit: (question: Question) => void }) {
