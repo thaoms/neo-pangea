@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Html } from '@react-three/drei';
 import { latLonToVector3 } from '../utils/latLonToVector3';
 import { GlowingBeam } from './GlowingBeam';
@@ -16,6 +16,7 @@ interface SpeechBubble3DProps {
     markerRadius: number;
     earthGroupRef: React.RefObject<THREE.Group>; // Reference to the Earth group
     onClick: (question: Question) => void;
+    isIdle: boolean;
 }
 
 export function SpeechBubble3D({
@@ -23,6 +24,7 @@ export function SpeechBubble3D({
     markerRadius,
     earthGroupRef,
     onClick,
+    isIdle,
 }: SpeechBubble3DProps) {
     const position = useMemo(() => latLonToVector3(question.lat, question.lon, markerRadius), [question.lat, question.lon, markerRadius]);
     const normal = useMemo(() => position.clone().normalize(), [position]);
@@ -114,17 +116,24 @@ export function SpeechBubble3D({
 
     return (
         <group position={position.toArray()} quaternion={quaternion}>
-            <GlowingBeam
-                position={new THREE.Vector3(0, 0, 0)}
-                height={0.6}
-                radius={0.002}
-                color="orange"
-            />
+            {!isIdle && (
+                <GlowingBeam
+                    position={new THREE.Vector3(0, 0, 0)}
+                    height={0.6}
+                    radius={0.002}
+                    color="orange"
+                />
+            )}
             {isVisible && (
                 <Html
                     position={[0, tooltipOffset, 0]}
                     distanceFactor={1}
                     zIndexRange={[20, 0]}
+                    style={{
+                        opacity: isIdle ? 0 : 1, // Control visibility based on idle state
+                        transition: 'opacity 1s ease-in-out', // Smooth fade effect
+                        pointerEvents: isIdle ? 'none' : 'auto', // Disable interactions when idle
+                    }}
                 >
                     <div
                         className="speech-bubble"

@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useRef } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { SpeechBubbles3D } from './SpeechBubbles';
@@ -16,10 +16,16 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
     const localEarth = useRef<THREE.Group>(null);
     const isMobile = useIsMobile();
 
+    const [idle, setIdle] = useState(false);
+    const idleTimeoutRef = useRef<number | null>(null);
+
     const markerRadius = 1;
 
     const params = {
         speedFactor: 2.0, // rotation speed of the earth
+        idleTimeout: 20000, // 5 seconds of inactivity triggers idle mode
+        fadeDuration: 1000, // Fade duration in ms
+
     };
 
     const texturePaths = useMemo(() => isMobile
@@ -74,6 +80,35 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
         }
     });
 
+    const resetIdleTimer = () => {
+        setIdle(false);
+
+        if (idleTimeoutRef.current) {
+            clearTimeout(idleTimeoutRef.current);
+        }
+
+        idleTimeoutRef.current = window.setTimeout(() => {
+            setIdle(true);
+        }, params.idleTimeout);
+    };
+
+    useEffect(() => {
+        const handleUserActivity = () => resetIdleTimer();
+
+        window.addEventListener('mousemove', handleUserActivity);
+        window.addEventListener('touchstart', handleUserActivity);
+
+        resetIdleTimer();
+
+        return () => {
+            window.removeEventListener('mousemove', handleUserActivity);
+            window.removeEventListener('touchstart', handleUserActivity);
+            if (idleTimeoutRef.current) {
+                clearTimeout(idleTimeoutRef.current);
+            }
+        };
+    }, []);
+
     return (
         <group ref={earthGroupRef}>
             <group ref={localEarth}>
@@ -89,11 +124,9 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                         emissiveMap={earthLights}
                         emissive={new THREE.Color(0xffff88)}
                         onBeforeCompile={(shader) => {
-                        // Add cloud uniform
                             shader.uniforms.tClouds = { value: cloudTexture };
                             shader.uniforms.uv_xOffset = { value: 0.002 };
 
-                            // Inject cloud-related uniforms and logic
                             shader.fragmentShader = shader.fragmentShader.replace(
                                 '#include <common>',
                                 `
@@ -141,7 +174,12 @@ export function Earth({ onClick }: { onClick: (question: Question) => void }) {
                     />
                 </mesh>
                 <Suspense fallback={<Loader />}>
-                    <SpeechBubbles3D markerRadius={markerRadius} onClick={onClick} earthGroupRef={earthGroupRef} />
+                    <SpeechBubbles3D
+                        markerRadius={markerRadius}
+                        onClick={onClick}
+                        earthGroupRef={earthGroupRef}
+                        isIdle={idle}
+                    />
                     <CurrentLocation markerRadius={markerRadius} />
                 </Suspense>
             </group>

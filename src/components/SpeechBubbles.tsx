@@ -6,9 +6,10 @@ interface SpeechBubbles3DProps {
     markerRadius: number;
     onClick: (question: Question) => void;
     earthGroupRef: RefObject<THREE.Group>;
+    isIdle: boolean;
 }
 
-const SpeechBubbles3D = memo(({ markerRadius, onClick, earthGroupRef }: SpeechBubbles3DProps) => {
+const SpeechBubbles3D = memo(({ markerRadius, onClick, earthGroupRef, isIdle }: SpeechBubbles3DProps) => {
     const [questions, setQuestions] = useState([]);
 
     const getQuestions = async () => {
@@ -47,6 +48,7 @@ const SpeechBubbles3D = memo(({ markerRadius, onClick, earthGroupRef }: SpeechBu
                     markerRadius={markerRadius}
                     onClick={onClick}
                     earthGroupRef={earthGroupRef}
+                    isIdle={isIdle}
                 />
             ))}
         </>
