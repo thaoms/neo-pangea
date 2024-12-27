@@ -1,4 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Howl } from 'howler';
+import Typewriter from 'typewriter-effect';
 
 export function ResponseField({
     question,
@@ -12,14 +14,60 @@ export function ResponseField({
     onClose: () => void;
 }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const [hasPlayedOpenSound, setHasPlayedOpenSound] = useState(false);
+
+    const typingSound = useRef<Howl | null>(null);
+    const openSound = useRef<Howl | null>(null);
+    const closeSound = useRef<Howl | null>(null);
 
     useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
-                onClose();
-            }
-        };
+        typingSound.current = new Howl({
+            src: ['./audio/fast-typing-keyboard.mp3'],
+            loop: true,
+            volume: 0.2,
+        });
 
+        openSound.current = new Howl({
+            src: ['./audio/ui-pop-up.mp3'],
+            volume: 0.5,
+        });
+
+        closeSound.current = new Howl({
+            src: ['./audio/ui-exit.mp3'],
+            volume: 0.5,
+        });
+
+        return () => {
+            typingSound.current?.unload();
+            openSound.current?.unload();
+            closeSound.current?.unload();
+        };
+    }, []);
+
+    // Play open sound only once when modal becomes visible
+    useEffect(() => {
+        if ((response || loading) && !hasPlayedOpenSound) {
+            openSound.current?.play();
+            setHasPlayedOpenSound(true); // Mark that the sound has been played
+        }
+
+        if (!response && !loading) {
+            setHasPlayedOpenSound(false); // Reset when modal is closed
+        }
+
+        if (response && !loading) {
+            typingSound.current?.play();
+        }
+    }, [response, loading, hasPlayedOpenSound]);
+
+    const handleClose = () => {
+        typingSound.current?.stop();
+        closeSound.current?.play();
+        onClose();
+    };
+
+    // Add parallax effect
+    useEffect(() => {
         const handleMouseMove = (event: MouseEvent) => {
             if (!containerRef.current) return;
 
@@ -32,14 +80,26 @@ export function ResponseField({
             containerRef.current.style.transform = `translate(-50%, -50%) perspective(1000px) rotateX(${-yOffset}deg) rotateY(${xOffset}deg)`;
         };
 
-        document.addEventListener('keydown', handleKeyDown);
         document.addEventListener('mousemove', handleMouseMove);
 
         return () => {
-            document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [onClose]);
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                handleClose();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleClose]);
 
     return (
         <>
@@ -47,7 +107,7 @@ export function ResponseField({
                 className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity z-50 ${
                     response || loading ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
-                onClick={onClose}
+                onClick={handleClose}
             >
             </div>
             <div
@@ -65,7 +125,7 @@ export function ResponseField({
                 }}
             >
                 <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     style={{
                         background:
                             'linear-gradient(to right, rgba(13, 42, 135, 0.5), rgba(88, 28, 135, 0.4), rgba(150, 20, 80, 0.3))',
@@ -93,7 +153,21 @@ export function ResponseField({
                         !loading && response ? 'opacity-100' : 'opacity-0'
                     }`}
                 >
-                    {response}
+                    {response && (
+                        <Typewriter
+                            options={{
+                                delay: 50,
+                            }}
+                            onInit={(typewriter) => {
+                                typewriter
+                                    .typeString(response)
+                                    .callFunction(() => {
+                                        typingSound.current?.stop();
+                                    })
+                                    .start();
+                            }}
+                        />
+                    )}
                 </pre>
             </div>
         </>

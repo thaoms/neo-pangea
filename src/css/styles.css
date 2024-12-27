@@ -51,3 +51,19 @@
 .animate-spin {
     animation: spin 1s linear infinite;
 }
+
+.blinking-cursor {
+    display: inline-block;
+    width: 8px;
+    background-color: black;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to {
+        background-color: transparent;
+    }
+    50% {
+        background-color: white;
+    }
+}

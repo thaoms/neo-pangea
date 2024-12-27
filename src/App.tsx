@@ -19,7 +19,6 @@ export function App() {
     const cameraRef = useRef<THREE.Camera | null>(null);
     const isMobile = useIsMobile();
 
-
     const handleQuestionSubmission = useCallback(async (questionRaw: Question) => {
         setLoading(true);
         setResponse('');
@@ -125,7 +124,7 @@ export function App() {
                     onClose={() => setResponse('')}
                 />
                 <About />
-                <AudioControl audioFile="./audio/ambient-space-noise-55472.mp3" />
+                <AudioControl audioFile="./audio/ambient-space-noise.mp3" />
                 <SpotifyPlayerDrawer />
             </ErrorBoundary>
         </StrictMode>
