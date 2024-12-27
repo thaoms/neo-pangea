@@ -34,7 +34,7 @@ export function Effects() {
                         luminanceThreshold={0.6}
                         luminanceSmoothing={0.6}
                         opacity={3}
-                        intensity={0.5}
+                        intensity={0.2}
                         height={300}
                     />
                     <GodRays

@@ -8,7 +8,6 @@ interface AtmosphereProps {
 
 export function Atmosphere({ markerRadius }: AtmosphereProps) {
     const glowMeshRef = useRef<THREE.Mesh>(null);
-
     const fresnelMat = getAtmosphereGlowMaterial();
 
     return (
