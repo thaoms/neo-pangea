@@ -1,5 +1,5 @@
-import { DepthOfField, Bloom, ToneMapping, Vignette, EffectComposer, GodRays } from '@react-three/postprocessing';
-import { BlendFunction } from 'postprocessing';
+import { DepthOfField, Bloom, ToneMapping, Vignette, EffectComposer, GodRays, Glitch, Scanline, BrightnessContrast, HueSaturation } from '@react-three/postprocessing';
+import { BlendFunction, GlitchMode } from 'postprocessing';
 import { useState } from 'react';
 import { Mesh } from 'three';
 import { Sun } from './Sun';
@@ -23,6 +23,18 @@ export function Effects() {
                         middleGrey={0.1}
                         maxLuminance={16.0}
                         averageLuminance={1.0}
+                    />
+                    <Scanline
+                        blendFunction={BlendFunction.MULTIPLY} // blend mode
+                        density={1.25} // scanline density
+                    />
+                    <Glitch
+                        delay={[10, 45]} // min and max glitch delay
+                        duration={[0.6, 0.8]} // min and max glitch duration
+                        strength={[0.01, 0.2]} // min and max glitch strength
+                        mode={GlitchMode.SPORADIC} // glitch mode
+                        active // turn on/off the effect (switches between "mode" prop and GlitchMode.DISABLED)
+                        ratio={0.5} // Threshold for strong glitches, 0 - no weak glitches, 1 - no strong glitches.
                     />
                     <DepthOfField
                         focusDistance={0}
